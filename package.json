@@ -4,8 +4,15 @@
   "author": "Kiran Parajuli <kiranparajuli589@gmail.com>",
   "description": "Vue3 Youtube Component",
   "type": "module",
-  "keywords": ["vue", "vue3", "youtube", "iframe"],
-  "files": ["dist"],
+  "keywords": [
+    "vue",
+    "vue3",
+    "youtube",
+    "iframe"
+  ],
+  "files": [
+    "dist"
+  ],
   "main": "dist/VYoutube.umd.js",
   "module": "dist/VYoutube.es.js",
   "exports": {
@@ -21,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/kiranparajuli589/vue3-youtube/issues"
   },
-  "homepage": "https://github.com/kiranparajuli589/vue3-youtube",
+  "homepage": "https://github.com/kiranparajuli589/vue3-youtube#readme",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

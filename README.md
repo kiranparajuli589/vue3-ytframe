@@ -5,13 +5,18 @@ The component uses the composition API to create a reactive player instance and 
 - Supports Vue 3
 - Uses the composition API
 - No dependencies other than Vue 3
-- Supports all the methods and events of the YouTube iFrame API
+- Supports all the methods and events provided by the YouTube iFrame API
+
+## Installation
+```bash
+npm i vue3-ytframe
+```
 
 ## Props
 - `videoId` (required) - The ID of the YouTube video to play.
 - `width` (optional) - The width of the player. Default is "100%".
 - `height` (optional) - The height of the player. Default is "100%".
-- `playerVars` (optional) - An object containing additional options to pass to the YouTube iFrame player. Default is an empty object. Refer to the [https://developers.google.com/youtube/player_parameters) for a list of available options.
+- `playerVars` (optional) - An object containing additional options to pass to the YouTube iFrame player. Default is an empty object. Refer to the https://developers.google.com/youtube/player_parameters for a list of available options.
 
 ## Methods
 The following methods are available to control the behavior of the YouTube player:
@@ -51,6 +56,8 @@ The following events are available to listen to:
 - `playbackRateChange` - Emitted when the player's playback rate changes.
 
 ## Usage
+Here is simple example usage of the component:
+
 ```vue
 <template>
   <div class="player-page">
@@ -79,8 +86,9 @@ The following events are available to listen to:
 </template>
 <script setup>
 import {ref} from "vue";
-import VYoutube from "@kiran/vue3-youtube"
+import VYoutube from "vue3-ytframe"
 
+// declare a template reference
 const yt = ref(null)
 
 const videosSet1 = [
@@ -93,9 +101,10 @@ const videosSet2 = [
   "km3ZBzuFntw"
 ]
 
-// pause other videos when one is playing
+// a handler where no two or more frames are allowed to play simultaneously
 const onStateChange = (event) => {
   if (event.getPlayerState() === 1) {
+    // control the frames using the template reference
     yt.value.forEach((video) => {
       if (video.getVideoUrl() !== event.getVideoUrl()) {
         video.pauseVideo()
