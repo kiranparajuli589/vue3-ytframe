@@ -1,0 +1,8 @@
+.github
+.vscode
+.idea
+node_modules
+public
+index.html
+.gitignore
+vite.config.js
