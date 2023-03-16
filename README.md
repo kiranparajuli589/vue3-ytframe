@@ -8,9 +8,7 @@ The component uses the composition API to create a reactive player instance and 
 - Supports all the methods and events provided by the YouTube iFrame API
 
 ## Installation
-```bash
-npm i vue3-ytframe
-```
+`npm` publish is not finished yet. So, you can use the package directly from the GitHub repository. The component code is available here at https://github.com/kiranparajuli589/vue3-youtube/blob/master/src/VYoutube.vue
 
 ## Props
 - `videoId` (required) - The ID of the YouTube video to play.

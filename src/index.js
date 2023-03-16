@@ -1,5 +1,3 @@
-export default {
-    install: (app, options) => {
-        app.component('VYoutube', () => import('./VYoutube.vue'))
-    }
-}
+import VYoutube from "./VYoutube.vue";
+
+export default VYoutube;

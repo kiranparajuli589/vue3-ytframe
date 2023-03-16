@@ -1,6 +1,6 @@
 {
   "name": "vue3-ytframe",
-  "version": "0.1.0",
+  "version": "0.1.12",
   "author": "Kiran Parajuli <kiranparajuli589@gmail.com>",
   "description": "Vue3 Youtube Component",
   "type": "module",
