@@ -1,20 +1,19 @@
 {
   "name": "@kiran/vue3-youtube",
-  "private": false,
+  "author": "Kiran Parajuli",
   "version": "0.0.1",
-  "files": [
-    "dist"
-  ],
+  "type": "module",
+  "keywords": ["vue", "vue3", "youtube", "iframe"],
+  "files": ["dist"],
   "main": "dist/VYoutube.umd.js",
   "module": "dist/VYoutube.es.js",
   "exports": {
     ".": {
       "import": "./dist/VYoutube.es.js",
       "require": "./dist/VYoutube.umd.js"
-    },
-    "./package.json": "./package.json"
+    }
   },
-  "type": "module",
+  "repository": "https://github.com/kiranparajuli589/vue3-youtube",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
