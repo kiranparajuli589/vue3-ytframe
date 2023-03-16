@@ -51,11 +51,57 @@ The following events are available to listen to:
 - `playbackRateChange` - Emitted when the player's playback rate changes.
 
 ## Usage
-To use the YouTube Player Component in your Vue project, first install the YouTube iFrame API:
-
 ```vue
 <template>
-  <VYoutube videoId="abc123" :playerVars="{autoplay: 1}" />
+  <div class="player-page">
+    <VYoutube
+        v-for="video in videosSet1"
+        :key="video"
+        ref="yt"
+        :video-id="video"
+        height="300"
+        width="100%"
+        :player-vars="{ autoplay: 0, listType: 'user_uploads' }"
+        @state-change="onStateChange"
+    />
+    <h3>Kiran Parajuli</h3>
+    <VYoutube
+        v-for="video in videosSet2"
+        :key="video"
+        ref="yt"
+        :video-id="video"
+        height="300"
+        width="100%"
+        :player-vars="{ autoplay: 0, listType: 'user_uploads' }"
+        @state-change="onStateChange"
+    />
+  </div>
 </template>
+<script setup>
+import {ref} from "vue";
+import VYoutube from "@kiran/vue3-youtube"
+
+const yt = ref(null)
+
+const videosSet1 = [
+  "kGb9ftWR3l8",
+  "U_0iZpQPPoA",
+]
+
+const videosSet2 = [
+  "Ve_PI0i43QI",
+  "km3ZBzuFntw"
+]
+
+// pause other videos when one is playing
+const onStateChange = (event) => {
+  if (event.getPlayerState() === 1) {
+    yt.value.forEach((video) => {
+      if (video.getVideoUrl() !== event.getVideoUrl()) {
+        video.pauseVideo()
+      }
+    })
+  }
+}
+</script>
 ```
-In the example above, the `videoId` prop is required and must be a string representing the YouTube video ID. The playerVars prop is optional and can be used to pass any additional options to the YouTube iFrame player.
