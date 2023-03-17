@@ -1,4 +1,4 @@
-# Vue 3 Youtube
+# Vue3 Ytframe
 The component uses the composition API to create a reactive player instance and define various methods to control the player's behavior.
 
 ## Why?
