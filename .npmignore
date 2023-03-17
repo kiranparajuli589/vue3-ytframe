@@ -5,4 +5,6 @@ node_modules
 public
 index.html
 .gitignore
+src
 vite.config.js
+LICENSE

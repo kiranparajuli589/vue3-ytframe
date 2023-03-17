@@ -1,34 +1,39 @@
 {
   "name": "vue3-ytframe",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "author": "Kiran Parajuli <kiranparajuli589@gmail.com>",
-  "description": "Vue3 Youtube Component",
+  "description": "Vue3 Youtube Iframe API Wrapper Component",
   "type": "module",
   "keywords": [
     "vue",
     "vue3",
     "youtube",
-    "iframe"
+    "iframe",
+    "embed"
   ],
   "files": [
     "dist"
   ],
-  "main": "dist/VYoutube.umd.js",
-  "module": "dist/VYoutube.es.js",
+  "main": "./dist/vue-ytframe.umd.js",
+  "browser": "./dist/vue-ytframe.umd.js",
+  "unpkg": "./dist/vue-ytframe.umd.js",
+  "jsdelivr": "./dist/vue-ytframe.umd.js",
+  "module": "./dist/vue-ytframe.es.js",
   "exports": {
     ".": {
-      "import": "./dist/VYoutube.es.js",
-      "require": "./dist/VYoutube.umd.js"
+      "import": "./dist/vue3-ytframe.es.js",
+      "require": "./dist/vue-ytframe.umd.js"
     }
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/kiranparajuli589/vue3-youtube"
+    "url": "https://github.com/kiranparajuli589/vue3-ytframe"
   },
   "bugs": {
-    "url": "https://github.com/kiranparajuli589/vue3-youtube/issues"
+    "url": "https://github.com/kiranparajuli589/vue3-ytframe/issues"
   },
-  "homepage": "https://github.com/kiranparajuli589/vue3-youtube#readme",
+  "homepage": "https://github.com/kiranparajuli589/vue3-ytframe#readme",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

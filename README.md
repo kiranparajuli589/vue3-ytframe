@@ -59,7 +59,7 @@ Here is simple example usage of the component:
 ```vue
 <template>
   <div class="player-page">
-    <VYoutube
+    <VueYtframe
         v-for="video in videosSet1"
         :key="video"
         ref="yt"
@@ -69,8 +69,8 @@ Here is simple example usage of the component:
         :player-vars="{ autoplay: 0, listType: 'user_uploads' }"
         @state-change="onStateChange"
     />
-    <h3>Kiran Parajuli</h3>
-    <VYoutube
+    <br>
+    <VueYtframe
         v-for="video in videosSet2"
         :key="video"
         ref="yt"
@@ -84,7 +84,7 @@ Here is simple example usage of the component:
 </template>
 <script setup>
 import {ref} from "vue";
-import VYoutube from "vue3-ytframe"
+import VueYtframe from "vue3-ytframe"
 
 // declare a template reference
 const yt = ref(null)

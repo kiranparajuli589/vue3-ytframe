@@ -1,3 +1,4 @@
+import {resolve} from 'path'
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -6,10 +7,10 @@ export default defineConfig({
     plugins: [vue()],
     build: {
         lib: {
-            entry: 'src/index.js',
-            name: 'VYoutube',
-            fileName: (format) => `VYoutube.${format}.js`
-        }
+            entry: resolve(__dirname, 'lib/index.js'),
+            name: 'VueYtframe',
+            fileName: (format) => `vue-ytframe.${format}.js`
+        },
     },
     rollupOptions: {
         external: ['vue'],
