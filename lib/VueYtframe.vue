@@ -2,14 +2,20 @@
   <div ref="youtube" :id="playerID"></div>
 </template>
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 
 const player = ref(null)
 
 const props = defineProps( {
   videoId: {
     type: String,
-    required: true
+    required: false,
+    default: null
+  },
+  videoUrl: {
+    type: String,
+    required: false,
+    default: null
   },
   width: {
     type: [Number, String],
@@ -27,6 +33,23 @@ const props = defineProps( {
     default: () => ({}),
   },
 })
+
+watch(
+    [() => props.videoId, () => props.videoUrl],
+    ([videoId, videoUrl]) => {
+      if (!videoId && !videoUrl) {
+        console.error('At least one of the props "videoId" or "videoUrl" must be provided.');
+      }
+      if (!videoId && videoUrl) {
+        if (!getVideoIdFromYoutubeURL(videoUrl)) {
+          console.error('The provided "videoUrl" is not a valid Youtube URL.',
+              'If you are sure it is a valid YouTube URL and you are still getting this error,',
+              'please open an issue on GitHub at https://github.com/kiranparajuli589/vue3-ytframe/issues/new'
+          );
+        }
+      }
+    }
+);
 
 const playerID = ref(null)
 
@@ -76,11 +99,12 @@ const emit = defineEmits([
 
 function createPlayer() {
   const playerElement = document.getElementById(playerID.value)
+  const videoID = props.videoId || getVideoIdFromYoutubeURL(props.videoUrl)
   // eslint-disable-next-line no-undef
   player.value = new YT.Player(playerElement, {
     height: props.height,
     width: props.width,
-    videoId: props.videoId,
+    videoId: videoID,
     playerVars: props.playerVars,
     events: {
       "onReady": onPlayerReady,
@@ -208,6 +232,30 @@ function getOptions(opt) {
   return player.value.getOptions(opt);
 }
 
+/**
+ * Get the video id from a youtube url
+ *
+ * Following types of urls are supported:
+ *
+ * https://www.youtube.com/watch?v=SomE-ID
+ * https://youtu.be/SomE-ID
+ * https://m.youtube.com/watch?v=SomE-ID
+ * https://www.youtube.com/embed/SomE-ID
+ *
+ * @param url
+ * @returns {string|string|*}
+ */
+function getVideoIdFromYoutubeURL(url) {
+  const regex = /^https:\/\/(?:(?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu.be\/|youtube\.com\/embed\/)(?<id>[a-zA-Z0-9_-]+)$/gm
+  regex.lastIndex = 0
+  const match = regex.exec(url)
+  if (match) {
+    return match.groups.id
+  } else {
+    return null
+  }
+}
+
 
 defineExpose({
   player,
@@ -230,6 +278,7 @@ defineExpose({
   getPlayerStateText,
   getPlaybackRate,
   setPlaybackRate,
-  getOptions
+  getOptions,
+  getVideoIdFromYoutubeURL
 })
 </script>

@@ -8,10 +8,30 @@ The component uses the composition API to create a reactive player instance and 
 - Supports all the methods and events provided by the YouTube iFrame API
 
 ## Installation
-`npm` publish is not finished yet. So, you can use the package directly from the GitHub repository. The component code is available here at https://github.com/kiranparajuli589/vue3-youtube/blob/master/src/VYoutube.vue
+1. Package Installation
+
+    ```bash
+    npm i vue3-ytframe # using npm
+    pnpm i vue3-ytframe # using pnpm
+    yarn add vue3-ytframe # using yarn
+    ```
+
+2. Component registration
+
+    ```js
+    // src/main.js
+    
+    import VueYtframe from "vue3-ytframe"
+    
+    createApp(App)
+      .use(VueYtframe)
+      .mount('#app')
+    ```
 
 ## Props
-- `videoId` (required) - The ID of the YouTube video to play.
+- `videoId` (optional) - The ID of the YouTube video to embed.
+- `videoUrl` (optional) - The URL of the YouTube video to embed.
+    > **Note:** Either `videoId` or `videoUrl` is required. If both are provided, `videoId` will be used.
 - `width` (optional) - The width of the player. Default is "100%".
 - `height` (optional) - The height of the player. Default is "100%".
 - `playerVars` (optional) - An object containing additional options to pass to the YouTube iFrame player. Default is an empty object. Refer to the https://developers.google.com/youtube/player_parameters for a list of available options.
@@ -22,13 +42,13 @@ The following methods are available to control the behavior of the YouTube playe
 - `playVideo()` - Plays the currently loaded video.
 - `pauseVideo()` - Pauses the currently loaded video.
 - `stopVideo()` - Stops the currently loaded video.
-- `seekTo(s`econds: number, allowSeekAhead: boolean) - Seeks to a specified time in the video. The seconds parameter is the time in seconds to seek to, and allowSeekAhead is a boolean indicating whether to allow the player to make a new request for unbuffered data if the time is outside of the currently buffered video data.
+- `seekTo(seconds: number, allowSeekAhead: boolean)` - Seeks to a specified time in the video. The `seconds` parameter is the time in seconds to seek to, and `allowSeekAhead` is a boolean indicating whether to allow the player to make a new request for unbuffered data if the time is outside the currently buffered video data.
 - `mute()` - Mutes the player.
 - `unMute()` - Unmutes the player.
 - `isMuted()` - Returns a boolean indicating whether the player is muted.
 - `setVolume(volume: number)` - Sets the player's volume. The volume parameter should be a number between 0 and 100.
 - `getVolume()` - Returns the player's current volume level as a number between 0 and 100.
-- `setSize(w`idth: number, height: number) - Sets the player's width and height.
+- `setSize(width: number, height: number)` - Sets the player's width and height.
 - `getDuration()` - Returns the duration of the currently playing video in seconds.
 - `getCurrentTime()` - Returns the current playback time in seconds.
 - `getVideoEmbedCode()` - Returns the embed code for the currently playing video.
@@ -37,7 +57,7 @@ The following methods are available to control the behavior of the YouTube playe
 - `getPlayerState()` - Returns the current state of the player.
 - `getPlayerStateText()` - Returns a string describing the current state of the player.
 - `getPlaybackRate()` - Returns the current playback rate of the player.
-- `setPlaybackRate(suggestedRate: number)` - Sets the suggested playback rate for the player. The suggestedRate parameter should be a number representing the suggested playback rate.
+- `setPlaybackRate(suggestedRate: number)` - Sets the suggested playback rate for the player. The `suggestedRate` parameter should be a number representing the suggested playback rate.
 - `getOptions(opt: string)` - Returns the player options for a specified key.
 
 ## Events
@@ -84,7 +104,6 @@ Here is simple example usage of the component:
 </template>
 <script setup>
 import {ref} from "vue";
-import VueYtframe from "vue3-ytframe"
 
 // declare a template reference
 const yt = ref(null)
@@ -112,3 +131,5 @@ const onStateChange = (event) => {
 }
 </script>
 ```
+
+> **Note:** With the `app.use(VueYtframe)` command in the `main.js` file _(which is a must)_, the component will be available globally inside the project. There is no need to import the component in every component.
