@@ -13,6 +13,7 @@
   </div>
 </template>
 <script setup>
+import VueYtframe from "../lib/VueYtframe.vue";
 
 const videosSet1 = [
   "kGb9ftWR3l8",

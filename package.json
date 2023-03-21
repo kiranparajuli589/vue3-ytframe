@@ -1,6 +1,6 @@
 {
   "name": "vue3-ytframe",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "author": "Kiran Parajuli <kiranparajuli589@gmail.com>",
   "description": "A Vue3 YouTube Iframe API Wrapper Component",
   "type": "module",

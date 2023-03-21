@@ -37,25 +37,31 @@ const props = defineProps( {
 watch(
     [() => props.videoId, () => props.videoUrl],
     ([videoId, videoUrl]) => {
-      if (!videoId && !videoUrl) {
-        console.error('At least one of the props "videoId" or "videoUrl" must be provided.');
-      }
-      if (!videoId && videoUrl) {
-        if (!getVideoIdFromYoutubeURL(videoUrl)) {
-          console.error('The provided "videoUrl" is not a valid Youtube URL.',
-              'If you are sure it is a valid YouTube URL and you are still getting this error,',
-              'please open an issue on GitHub at https://github.com/kiranparajuli589/vue3-ytframe/issues/new'
-          );
-        }
-      }
+      validate(videoId, videoUrl)
     }
 );
+
+function validate(videoId, videoUrl) {
+  if (!videoId && !videoUrl) {
+    console.error('At least one of the props "videoId" or "videoUrl" must be provided.');
+  }
+  if (!videoId && videoUrl) {
+    if (!getVideoIdFromYoutubeURL(videoUrl)) {
+      console.error(`The provided video URL (${videoUrl}) is not a valid Youtube URL.`,
+          'If you are sure it is a valid YouTube URL and you are still getting this error,',
+          'please open an issue on GitHub at https://github.com/kiranparajuli589/vue3-ytframe/issues/new'
+      );
+    }
+  }
+}
 
 const playerID = ref(null)
 
 onMounted(async () => {
   // assign a random id to the player
   playerID.value = Math.random().toString(36).substring(2, 12)
+
+  validate(props.videoId, props.videoUrl)
 
   loadAPI().then(() => {
     checkIfYTLoaded().then(() => {
