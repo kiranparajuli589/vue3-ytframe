@@ -1,28 +1,29 @@
 {
   "name": "vue3-ytframe",
-  "version": "0.1.13",
+  "version": "0.1.15",
   "author": "Kiran Parajuli <kiranparajuli589@gmail.com>",
-  "description": "Vue3 Youtube Iframe API Wrapper Component",
+  "description": "A Vue3 YouTube Iframe API Wrapper Component",
   "type": "module",
   "keywords": [
     "vue",
     "vue3",
     "youtube",
     "iframe",
-    "embed"
+    "embed",
+    "youtube-iframe-api"
   ],
   "files": [
     "dist"
   ],
-  "main": "./dist/vue-ytframe.umd.js",
-  "browser": "./dist/vue-ytframe.umd.js",
-  "unpkg": "./dist/vue-ytframe.umd.js",
-  "jsdelivr": "./dist/vue-ytframe.umd.js",
-  "module": "./dist/vue-ytframe.es.js",
+  "main": "dist/ytframe.umd.js",
+  "browser": "dist/ytframe.umd.js",
+  "unpkg": "dist/ytframe.umd.js",
+  "jsdelivr": "dist/ytframe.umd.js",
+  "module": "dist/ytframe.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vue3-ytframe.es.js",
-      "require": "./dist/vue-ytframe.umd.js"
+      "import": "./dist/ytframe.es.js",
+      "require": "./dist/ytframe.umd.js"
     }
   },
   "sideEffects": false,

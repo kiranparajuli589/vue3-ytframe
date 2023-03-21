@@ -9,15 +9,15 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, 'lib/index.js'),
             name: 'VueYtframe',
-            fileName: (format) => `vue-ytframe.${format}.js`
+            fileName: (format) => `ytframe.${format}.js`
         },
-    },
-    rollupOptions: {
-        external: ['vue'],
-        output: {
-            globals: {
-                vue: 'Vue'
+        rollupOptions: {
+            external: ['vue'],
+            output: {
+                globals: {
+                    vue: 'Vue'
+                }
             }
         }
-    }
+    },
 })
