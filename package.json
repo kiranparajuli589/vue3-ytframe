@@ -1,51 +1,68 @@
 {
-  "name": "vue3-ytframe",
-  "version": "0.2.2",
-  "author": "Kiran Parajuli <kiranparajuli589@gmail.com>",
-  "description": "A Vue3 YouTube Iframe API Wrapper Component",
-  "type": "module",
-  "keywords": [
-    "vue",
-    "vue3",
-    "youtube",
-    "iframe",
-    "embed",
-    "youtube-iframe-api"
-  ],
-  "files": [
-    "dist"
-  ],
-  "main": "dist/ytframe.umd.js",
-  "browser": "dist/ytframe.umd.js",
-  "unpkg": "dist/ytframe.umd.js",
-  "jsdelivr": "dist/ytframe.umd.js",
-  "module": "dist/ytframe.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/ytframe.es.js",
-      "require": "./dist/ytframe.umd.js"
-    }
-  },
-  "sideEffects": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kiranparajuli589/vue3-ytframe"
-  },
-  "bugs": {
-    "url": "https://github.com/kiranparajuli589/vue3-ytframe/issues"
-  },
-  "homepage": "https://github.com/kiranparajuli589/vue3-ytframe#readme",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "vue": "^3.2.45"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^4.0.0",
-    "vite": "^4.1.0"
-  },
-  "license": "GPL-3.0"
+	"name": "vue3-ytframe",
+	"version": "0.2.2",
+	"author": "Kiran Parajuli <kiranparajuli589@gmail.com>",
+	"description": "A Vue3 YouTube Iframe API Wrapper Component",
+	"type": "module",
+	"keywords": [
+		"vue",
+		"vue3",
+		"youtube",
+		"iframe",
+		"embed",
+		"youtube-iframe-api"
+	],
+	"files": [
+		"dist"
+	],
+	"main": "dist/ytframe.umd.js",
+	"browser": "dist/ytframe.umd.js",
+	"unpkg": "dist/ytframe.umd.js",
+	"jsdelivr": "dist/ytframe.umd.js",
+	"module": "dist/ytframe.es.js",
+	"exports": {
+		".": {
+			"import": "./dist/ytframe.es.js",
+			"require": "./dist/ytframe.umd.js"
+		}
+	},
+	"sideEffects": false,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kiranparajuli589/vue3-ytframe"
+	},
+	"bugs": {
+		"url": "https://github.com/kiranparajuli589/vue3-ytframe/issues"
+	},
+	"homepage": "https://github.com/kiranparajuli589/vue3-ytframe#readme",
+	"scripts": {
+		"dev": "vite",
+		"build-lib": "vite build --mode lib",
+		"build-docs": "vite build --mode docs",
+		"preview": "vite preview",
+		"lint": "eslint src lib --ext .js,.vue",
+		"lint:fix": "eslint src lib --fix --ext .js,.vue",
+		"stylelint": "stylelint src lib --config stylelint.conf.cjs",
+		"stylelint:fix": "stylelint src lib --config stylelint.conf.cjs --fix"
+	},
+	"dependencies": {
+		"vue": "^3.2.45"
+	},
+	"devDependencies": {
+		"@mdi/font": "^7.2.96",
+		"@vitejs/plugin-vue": "^4.0.0",
+		"eslint": "^8.36.0",
+		"eslint-plugin-vue": "^9.9.0",
+		"pinia": "^2.0.33",
+		"postcss": ">=8.4.19 <9.0.0",
+		"postcss-html": ">=1.0.0 <2.0.0",
+		"sass": "^1.59.3",
+		"stylelint": "^15.3.0",
+		"stylelint-config-recommended-scss": "^9.0.1",
+		"stylelint-config-recommended-vue": "^1.4.0",
+		"stylelint-config-standard": "^31.0.0",
+		"vite": "^4.1.0",
+		"vue-router": "4"
+	},
+	"license": "GPL-3.0"
 }

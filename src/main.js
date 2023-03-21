@@ -1,7 +1,10 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import VYoutube from "../lib/VueYtframe.vue";
+import {createApp} from "vue"
+import App from "./App.vue"
+import router from "./router"
+import pinia from "./store"
+import "@mdi/font/css/materialdesignicons.css"
 
 createApp(App)
-    .use(VYoutube)
-    .mount('#app')
+	.use(router)
+	.use(pinia)
+	.mount("#app")
