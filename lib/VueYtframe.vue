@@ -52,21 +52,37 @@ watch(
 
 watch(() => props.videoId, (videoId) => {
 	if (player.value && videoId) {
-		loadVideoById({
-			videoId,
-			startSeconds: props.playerVars.start || 0,
-			endSeconds: props.playerVars.end || 0,
-		})
+		if (props.playerVars?.autoplay === 1) {
+			loadVideoById({
+				videoId,
+				startSeconds: props.playerVars.start || 0,
+				endSeconds: props.playerVars.end || 0,
+			})
+		} else {
+			cueVideoById({
+				videoId,
+				startSeconds: props.playerVars.start || 0,
+				endSeconds: props.playerVars.end || 0,
+			})
+		}
 	}
 })
 
 watch(() => props.videoUrl, (videoUrl) => {
 	if (player.value && videoUrl) {
-		loadVideoByUrl({
-			mediaContentUrl: videoUrl,
-			startSeconds: props.playerVars.start || 0,
-			endSeconds: props.playerVars.end || 0,
-		})
+		if (props.playerVars?.autoplay) {
+			loadVideoByUrl({
+				videoUrl,
+				startSeconds: props.playerVars.start || 0,
+				endSeconds: props.playerVars.end || 0,
+			})
+		} else {
+			cueVideoByUrl({
+				videoUrl,
+				startSeconds: props.playerVars.start || 0,
+				endSeconds: props.playerVars.end || 0,
+			})
+		}
 	}
 })
 
@@ -319,30 +335,6 @@ function getDuration() {
  */
 function getCurrentTime() {
 	return player.value.getCurrentTime()
-}
-
-/**
- * @returns {Number}
- * @see https://developers.google.com/youtube/iframe_api_reference#getVideoStartBytes
- */
-function getVideoStartBytes() {
-	return player.value.getVideoStartBytes()
-}
-
-/**
- * @returns {Number}
- * @see https://developers.google.com/youtube/iframe_api_reference#getVideoBytesLoaded
- */
-function getVideoBytesLoaded() {
-	return player.value.getVideoBytesLoaded()
-}
-
-/**
- * @returns {Number}
- * @see https://developers.google.com/youtube/iframe_api_reference#getVideoBytesTotal
- */
-function getVideoBytesTotal() {
-	return player.value.getVideoBytesTotal()
 }
 
 /**
@@ -609,9 +601,6 @@ defineExpose({
 	setLoop,
 	getDuration,
 	getCurrentTime,
-	getVideoStartBytes,
-	getVideoBytesLoaded,
-	getVideoBytesTotal,
 	getVideoEmbedCode,
 	getVideoUrl,
 	getVideoLoadedFraction,

@@ -46,6 +46,7 @@
 		"stylelint:fix": "stylelint src lib --config stylelint.conf.cjs --fix"
 	},
 	"dependencies": {
+		"highlight.js": "^11.7.0",
 		"vue": "^3.2.45"
 	},
 	"devDependencies": {

@@ -15,6 +15,7 @@
 	padding: 1rem .5rem;
 	background-color: #f5f5f5;
 	font-weight: 200;
+
 	.bold {
 		font-weight: 500;
 	}

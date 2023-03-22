@@ -14,7 +14,8 @@ module.exports = {
 		"selector-list-comma-newline-after": null,
 		"value-no-vendor-prefix": null,
 		"property-no-vendor-prefix": null,
-		"selector-class-pattern": null
+		"selector-class-pattern": null,
+		"value-keyword-case": null,
 	},
 	ignoreFiles: [
 		"**/*.js",

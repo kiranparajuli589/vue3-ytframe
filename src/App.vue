@@ -1,7 +1,6 @@
 <template>
 	<div class="main-content">
 		<AppBar />
-		<hr />
 		<router-view />
 		<TheFooter />
 	</div>
@@ -33,6 +32,9 @@ watch(isDark, (val) => {
 })
 </script>
 <style lang="scss">
+/* stylelint-disable-next-line */
+@use "sass:meta";
+/* stylelint-disable-next-line */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
@@ -44,7 +46,16 @@ watch(isDark, (val) => {
 	--vue-color: #42b883;
 }
 
+body:not([theme-dark]) {
+	/* stylelint-disable-next-line */
+	@include meta.load-css("highlight.js/styles/github.css");
+}
+
+
 body.theme--dark {
+	/* stylelint-disable-next-line */
+	@include meta.load-css("highlight.js/styles/github-dark.css");
+
 	background-color: #1a1a1a;
 	color: #fff;
 }

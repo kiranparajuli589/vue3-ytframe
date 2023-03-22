@@ -34,6 +34,7 @@ const {push} = useRouter()
 	justify-content: space-between;
 	flex-wrap: wrap;
 	padding-inline: .5rem;
+	border-bottom: 1px solid grey;
 
 	&--logo {
 		height: 100%;
