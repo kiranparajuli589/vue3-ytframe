@@ -5,10 +5,10 @@
 			<div class="app-bar--title">Vue3 Ytframe</div>
 		</div>
 		<div class="app-bar--actions">
-			<div class="link">Home</div>
-			<div class="link">Docs</div>
-			<div class="link">Example</div>
-			<div class="link">About</div>
+			<div class="link" @click="push({name: 'Home'})">Home</div>
+			<div class="link" @click="push({name: 'Docs'})">Docs</div>
+			<div class="link" @click="push({name: 'Playground'})">Playground</div>
+			<div class="link" @click="push({name: 'About'})">About</div>
 			<div class="separator" />
 			<div class="theme-select" @click="toggleDark()" title="Toggle Theme">
 				<div v-if="isDark" class="mdi mdi-weather-night"/>
@@ -21,10 +21,11 @@
 	</header>
 </template>
 <script setup>
-
 import useAppStore from "../composables/useAppStore.js"
+import {useRouter} from "vue-router"
 
 const {isDark, toggleDark} = useAppStore()
+const {push} = useRouter()
 </script>
 <style lang="scss">
 .app-bar {

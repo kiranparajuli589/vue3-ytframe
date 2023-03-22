@@ -158,15 +158,15 @@ function onPlayerReady(event) {
 
 function onPlayerStateChange(event) {
 	switch (event.data) {
-		case window.YT.PlayerState.PLAYING:
-			emit("playing", event.target)
-			break
-		case window.YT.PlayerState.PAUSED:
-			emit("paused", event.target)
-			break
-		case window.YT.PlayerState.ENDED:
-			emit("ended", event.target)
-			break
+	case window.YT.PlayerState.PLAYING:
+		emit("playing", event.target)
+		break
+	case window.YT.PlayerState.PAUSED:
+		emit("paused", event.target)
+		break
+	case window.YT.PlayerState.ENDED:
+		emit("ended", event.target)
+		break
 	}
 	emit("stateChange", event.target)
 }

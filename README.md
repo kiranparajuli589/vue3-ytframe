@@ -49,30 +49,49 @@
 
 The following methods are available to control the behavior of the YouTube player:
 
-- `playVideo()` - Plays the currently loaded video.
-- `pauseVideo()` - Pauses the currently loaded video.
-- `stopVideo()` - Stops the currently loaded video.
-- `seekTo(seconds: number, allowSeekAhead: boolean)` - Seeks to a specified time in the video. The `seconds` parameter
-  is the time in seconds to seek to, and `allowSeekAhead` is a boolean indicating whether to allow the player to make a
-  new request for unbuffered data if the time is outside the currently buffered video data.
-- `mute()` - Mutes the player.
-- `unMute()` - Unmutes the player.
-- `isMuted()` - Returns a boolean indicating whether the player is muted.
-- `setVolume(volume: number)` - Sets the player's volume. The volume parameter should be a number between 0 and 100.
-- `getVolume()` - Returns the player's current volume level as a number between 0 and 100.
-- `setSize(width: number, height: number)` - Sets the player's width and height.
-- `getDuration()` - Returns the duration of the currently playing video in seconds.
-- `getCurrentTime()` - Returns the current playback time in seconds.
-- `getVideoEmbedCode()` - Returns the embed code for the currently playing video.
-- `getVideoUrl()` - Returns the YouTube.com URL for the currently playing video.
-- `getVideoLoadedFraction()` - Returns a number between 0 and 1 indicating the percentage of the video that has been
-  loaded.
-- `getPlayerState()` - Returns the current state of the player.
-- `getPlayerStateText()` - Returns a string describing the current state of the player.
-- `getPlaybackRate()` - Returns the current playback rate of the player.
-- `setPlaybackRate(suggestedRate: number)` - Sets the suggested playback rate for the player. The `suggestedRate`
-  parameter should be a number representing the suggested playback rate.
-- `getOptions(opt: string)` - Returns the player options for a specified key.
+- `playVideo`: Plays the currently cued/loaded video.
+- `pauseVideo`: Pauses the currently playing video.
+- `stopVideo`: Stops and cancels loading of the current video.
+- `seekTo`: Seeks to a specified time in the video.
+- `nextVideo`: Plays the next video in the playlist.
+- `previousVideo`: Plays the previous video in the playlist.
+- `playVideoAt`: Plays the video at the given index in the playlist.
+- `mute`: Mutes the player.
+- `unMute`: Unmutes the player.
+- `isMuted`: Returns whether the player is muted.
+- `setVolume`: Sets the volume.
+- `getVolume`: Returns the player's current volume, in the range 0 to 100.
+- `setSize`: Sets the size of the <iframe> (in pixels).
+- `setShuffle`: Sets whether the player should shuffle the playlist.
+- `setLoop`: Sets whether the player should loop the playlist.
+- `getDuration`: Returns the duration of the current video in seconds.
+- `getCurrentTime`: Returns the elapsed time in seconds since the video started playing.
+- `getVideoStartBytes`: Returns the number of bytes loaded for the current video.
+- `getVideoBytesLoaded`: Returns the number of bytes loaded for the current video.
+- `getVideoBytesTotal`: Returns the total number of bytes for the current video.
+- `getVideoEmbedCode`: Returns the embed code for the current video.
+- `getVideoUrl`: Returns the URL for the current video.
+- `getVideoLoadedFraction`: Returns a number between 0 and 1 that specifies the percentage of the video that the player shows as buffered.
+- `getPlayerState`: Returns the state of the player.
+- `getPlaybackRate`: Returns the playback rate of the current video.
+- `setPlaybackRate`: Sets the provided playback rate for the current video.
+- `getAvailablePlaybackRates`: Returns a list of available playback rates.
+- `getOptions`: Returns the options for the player.
+- `getAnOption`: Returns the value of the specified option.
+- `setAnOption`: Sets the value of the specified option.
+- `getSphericalProperties`: Returns the spherical properties for the current video.
+- `setSphericalProperties`: Sets the spherical properties for the current video.
+- `getPlaylist`: Returns the playlist for the player.
+- `getPlaylistIndex`: Returns the index of the playlist item that is currently playing.
+- `getIframe`: Returns the <iframe> element that contains the player.
+- `destroy`: Destroys the player and removes the <iframe> from the DOM.
+- `loadVideoById`: Loads and plays the specified video.
+- `cueVideoById`: Loads the specified video and prepares the player to play the video.
+- `loadVideoByUrl`: Loads and plays the specified video.
+- `cueVideoByUrl`: Loads the specified video and prepares the player to play the video.
+- `cuePlaylist`: Loads the specified playlist and plays the first video.
+- `loadPlaylist`: Loads the specified playlist and plays the first video.
+- `getVideoIdFromYoutubeURL`: Returns the video ID from a YouTube URL.
 
 ## Events
 

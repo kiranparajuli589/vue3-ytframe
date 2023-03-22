@@ -12,9 +12,9 @@
 	right: 0;
 	text-align: center;
 	font-size: 12px;
-	padding: 1.2rem .5rem;
+	padding: 1rem .5rem;
 	background-color: #f5f5f5;
-
+	font-weight: 200;
 	.bold {
 		font-weight: 500;
 	}
