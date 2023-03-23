@@ -45,7 +45,6 @@ const docItems = ref([
 		title: "Illustrations",
 		items: [
 			{title: "Examples"},
-			{title: "Playground"},
 		]
 	}
 ])
@@ -62,6 +61,10 @@ const scrollToItem = (title) => {
 	padding: 1rem;
 	height: 100%;
 	border-right: 1px solid grey;
+
+	@media only screen and (max-width: 600px) {
+		display: none;
+	}
 
 	&--title {
 		margin-bottom: 2rem;

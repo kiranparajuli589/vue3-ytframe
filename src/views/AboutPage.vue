@@ -19,15 +19,19 @@ import pkg from "../../package.json"
 .about {
 	max-width: 600px;
 	margin: 0 auto;
+
 	h2 {
 		margin-top: 4rem;
 		margin-bottom: 1rem;
 	}
+
 	hr {
 		margin-bottom: 2rem;
 	}
+
 	div {
 		margin-bottom: .5rem;
+
 		span {
 			font-weight: 500;
 		}

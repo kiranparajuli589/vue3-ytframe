@@ -132,6 +132,10 @@ watch(() => currentRoute.value, (val) => {
 	height: calc(100vh - v-bind(appBarHeight) - v-bind(footerHeight));
 	overflow: auto;
 
+	@media only screen and (max-width: 600px) {
+		padding-left: 1rem;
+	}
+
 	section {
 		margin-bottom: 3rem;
 	}
