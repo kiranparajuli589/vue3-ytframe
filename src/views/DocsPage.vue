@@ -103,7 +103,7 @@ const initializeHeaderRefs = () => {
 		const link = document.createElement("a")
 		link.classList.add("header-link")
 		link.innerHTML = "<span class=\"mdi mdi-link-variant\" />"
-		link.href = `/#/docs/ref=${getTitleID(header.innerText)}`
+		link.href = `/vue3-ytframe/#/docs/ref=${getTitleID(header.innerText)}`
 		header.appendChild(link)
 	})
 }
