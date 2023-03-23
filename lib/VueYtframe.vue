@@ -52,6 +52,7 @@ watch(
 
 watch(() => props.videoId, (videoId) => {
 	if (player.value && videoId) {
+		console.log("watch", videoId)
 		if (props.playerVars?.autoplay === 1) {
 			loadVideoById({
 				videoId,
@@ -70,6 +71,7 @@ watch(() => props.videoId, (videoId) => {
 
 watch(() => props.videoUrl, (videoUrl) => {
 	if (player.value && videoUrl) {
+		console.log("watch", videoUrl)
 		if (props.playerVars?.autoplay) {
 			loadVideoByUrl({
 				videoUrl,
@@ -105,6 +107,7 @@ const playerId = ref(null)
 onMounted(async () => {
 	// assign a random id to the player
 	playerId.value = Math.random().toString(36).substring(2, 12)
+	console.log("mounted", props.videoUrl, props.videoId)
 
 	validate(props.videoId, props.videoUrl)
 
@@ -134,7 +137,7 @@ function checkIfYTLoaded() {
 	}
 	// recursively check if the YT object is loaded
 	// eslint-disable-next-line no-unused-vars
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		setTimeout(() => {
 			checkIfYTLoaded().then(() => {
 				resolve()
@@ -151,6 +154,7 @@ const emit = defineEmits([
 function createPlayer() {
 	const playerElement = document.getElementById(playerId.value)
 	const videoID = props.videoId || getVideoIdFromYoutubeURL(props.videoUrl)
+	console.log("createPlayer", videoID)
 	// eslint-disable-next-line no-undef
 	player.value = new YT.Player(playerElement, {
 		height: props.height,
@@ -559,7 +563,7 @@ function loadPlaylist(playlist, index, startSeconds) {
 }
 
 /**
- * Get the video id from a youtube url
+ * Get the video id from a YouTube url
  *
  * Following types of urls are supported:
  * https://www.youtube.com/watch?v=SomE-ID

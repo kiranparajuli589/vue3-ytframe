@@ -59,4 +59,33 @@ body.theme--dark {
 	background-color: #1a1a1a;
 	color: #fff;
 }
+
+a {
+	color: var(--vue-color);
+}
+
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px; // for vertical scrollbars
+	height: 10px; // for horizontal scrollbars
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #d7d7d7;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #868686;
+	border-radius: 24px;
+	margin: 1px;
+	border: 2px solid #d2d2d2;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #727272;
+}
 </style>

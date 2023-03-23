@@ -11,7 +11,7 @@
 https://kiranparajuli589.github.io/vue3-ytframe/#/playground
 
 ## Usage Examples
-https://kiranparajuli589.github.io/vue3-ytframe/#/playground
+https://kiranparajuli589.github.io/vue3-ytframe/#/docs/ref=examples
 
 ## Documentation
 https://kiranparajuli589.github.io/vue3-ytframe/#/docs/ref=

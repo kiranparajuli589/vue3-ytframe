@@ -1,9 +1,9 @@
 <template>
 	<header class="app-bar">
-		<div class="app-bar--head">
+		<a class="app-bar--head" href="/#/">
 			<div class="mdi mdi-youtube" />
 			<div class="app-bar--title">Vue3 Ytframe</div>
-		</div>
+		</a>
 		<div class="app-bar--actions">
 			<div class="link" @click="push({name: 'Home'})">Home</div>
 			<div class="link" @click="push({name: 'Docs'})">Docs</div>
@@ -55,6 +55,7 @@ const {push} = useRouter()
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
+		text-decoration: none;
 	}
 
 	&--actions {

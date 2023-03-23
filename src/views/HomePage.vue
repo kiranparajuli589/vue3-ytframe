@@ -7,17 +7,17 @@
 			An easy to use extension to embed YouTube videos into web using the full power provided by the Iframe API.
 		</div>
 		<div class="home-page--actions">
-			<div class="button">
+			<a class="button" href="/#/docs/ref=why-vueytframe">
 				<div class="mdi mdi-motion-play-outline" />
 				<span>Why VueYtframe</span>
-			</div>
+			</a>
 
-			<div class="button">
+			<a class="button" href="/#/docs/ref=getting-started">
 				Get Started
 				<div class="mdi mdi-arrow-right-bold-box-outline" />
-			</div>
+			</a>
 
-			<div class="button">Install</div>
+			<a class="button" href="/#/docs/ref=installation">Install</a>
 		</div>
 	</div>
 </template>
@@ -62,7 +62,7 @@
 			font-size: clamp(.8rem, 1.5vw, 1rem);
 			min-height: 40px;
 			cursor: pointer;
-			background: #f1f1f1;
+			text-decoration: none;
 
 			&:hover {
 				background: #e1e1e1;
