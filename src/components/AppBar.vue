@@ -1,6 +1,6 @@
 <template>
 	<header class="app-bar">
-		<a class="app-bar--head" href="/#/">
+		<a class="app-bar--head" href="/vue3-ytframe/#/">
 			<div class="mdi mdi-youtube" />
 			<div class="app-bar--title">Vue3 Ytframe</div>
 		</a>

@@ -58,7 +58,7 @@ onMounted(() => {
 			initializeCodeCopy()
 			initializeHeaderRefs()
 			hljs.highlightAll()
-
+			scrollToHeadingIfRefExists()
 		})
 })
 
@@ -110,15 +110,25 @@ const initializeHeaderRefs = () => {
 
 const {currentRoute} = useRouter()
 
+const scrollToHeading = (headingId) => {
+	const header = document.getElementById(headingId)
+	if (header) {
+		header.scrollIntoView({behavior: "smooth", block: "start"})
+	}
+}
+
 // watch route param and scroll to the header
 watch(() => currentRoute.value, (val) => {
 	if (val.params.ref) {
-		const header = document.getElementById(`${val.params.ref}`)
-		if (header) {
-			header.scrollIntoView({behavior: "smooth", block: "center"})
-		}
+		scrollToHeading(val.params.ref)
 	}
 })
+
+const scrollToHeadingIfRefExists = () => {
+	if (currentRoute.value.params.ref) {
+		scrollToHeading(currentRoute.value.params.ref)
+	}
+}
 
 </script>
 <style lang="scss">
