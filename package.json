@@ -1,6 +1,6 @@
 {
 	"name": "vue3-ytframe",
-	"version": "0.2.2",
+	"version": "0.3.0",
 	"author": "Kiran Parajuli <kiranparajuli589@gmail.com>",
 	"description": "A Vue3 YouTube Iframe API Wrapper Component",
 	"type": "module",
@@ -34,7 +34,7 @@
 	"bugs": {
 		"url": "https://github.com/kiranparajuli589/vue3-ytframe/issues"
 	},
-	"homepage": "https://github.com/kiranparajuli589/vue3-ytframe#readme",
+	"homepage": "https://kiranparajuli589.github.io/vue3-ytframe/#/",
 	"scripts": {
 		"dev": "vite",
 		"build-lib": "vite build --mode lib",
