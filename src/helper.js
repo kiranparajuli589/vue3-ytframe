@@ -38,10 +38,10 @@ export const WhyVueYtframe = {
 export const Installation = {
 	title: "Installation",
 	content: `<p>VueYtframe is available on NPM. You can install it using the following command:</p>
-		<pre><code>npm install vue-ytframe</code></pre>
+		<pre><code>npm install vue3-ytframe</code></pre>
 		<p>After installing the package, the component should be registered on the app</p>
 		<pre><code>import { createApp } from "vue"
-import VueYtframe from "vue-ytframe"
+import VueYtframe from "vue3-ytframe"
 
 const app = createApp()
 app.use(VueYtframe).mount("#app")</code></pre>`
