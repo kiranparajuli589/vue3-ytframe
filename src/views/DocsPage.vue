@@ -161,8 +161,7 @@ const scrollToHeadingIfRefExists = () => {
 		margin-bottom: 1rem;
 	}
 
-	p,
-	li {
+	p, li {
 		margin-bottom: .8rem;
 	}
 
@@ -203,8 +202,7 @@ const scrollToHeadingIfRefExists = () => {
 			text-align: left;
 		}
 
-		td,
-		th {
+		td, th {
 			padding: .5rem;
 			border: 1px solid grey;
 
