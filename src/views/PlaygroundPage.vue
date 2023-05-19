@@ -2,15 +2,9 @@
 	<div class="playground">
 		<h2>Playground</h2>
 		<div class="player">
-			<VueYtframe
-				v-if="videoId || videoUrl"
-				ref="yt"
-				:video-id="videoId"
-				:video-url="videoUrl"
-				:height="height"
-				:width="width"
-				:player-vars="playerParameters" />
-			<div v-else class="no-value">
+			<VueYtframe ref="yt" :video-id="videoId" :video-url="videoUrl" :height="height"
+				:width="width" :player-vars="playerParameters" />
+			<div v-if="!videoId && !videoUrl" class="no-value">
 				Input YouTube video ID or URL to initiate the player.
 			</div>
 		</div>
@@ -21,15 +15,13 @@
 			<div class="video-id">
 				<div class="title">Video ID</div>
 				<div class="text-input">
-					<input id="video-id" type="url" v-model="videoId">
-					<div class="mdi mdi-close" @click="clearVideoIdInput" />
+					<input id="video-id" type="text" v-model="videoId">
 				</div>
 			</div>
 			<div class="video-url">
 				<div class="title">Video URL</div>
 				<div class="text-input">
 					<input id="video-url" type="url" v-model="videoUrl">
-					<div class="mdi mdi-close" @click="clearVideoUrlInput" />
 				</div>
 			</div>
 			<div>
@@ -182,7 +174,7 @@
 	</div>
 </template>
 <script setup>
-import {computed, ref} from "vue"
+import { computed, ref } from "vue"
 import VueYtframe from "../../lib/VueYtframe.vue"
 
 const videoId = ref("")
@@ -234,9 +226,11 @@ const playerParameters = computed(() => {
 })
 
 const clearVideoIdInput = () => {
+	videoId.value = ""
 	document.getElementById("video-id").value = ""
 }
 const clearVideoUrlInput = () => {
+	videoUrl.value = ""
 	document.getElementById("video-url").value = ""
 }
 
@@ -263,6 +257,10 @@ const destroyPlayer = () => {
 		width: fit-content;
 	}
 
+	.actions, .props {
+		max-width: 600px;
+	}
+
 	.actions {
 		display: flex;
 		flex-wrap: wrap;
@@ -278,7 +276,7 @@ const destroyPlayer = () => {
 
 	.text-input {
 		position: relative;
-		width: fit-content;
+		// width: fit-content;
 	}
 
 	input {
@@ -286,6 +284,10 @@ const destroyPlayer = () => {
 		border-radius: 4px;
 		padding: .3rem 1.5rem .3rem .3rem;
 		margin-bottom: .5rem;
+	}
+
+	input[type="text"], input[type="url"] {
+		width: 100%;
 	}
 
 	.mdi-close {
@@ -311,7 +313,7 @@ const destroyPlayer = () => {
 	}
 
 	.player-parameters {
-		& > div {
+		&>div {
 			display: flex;
 			align-items: center;
 		}
