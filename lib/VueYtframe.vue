@@ -5,6 +5,7 @@
 import {onMounted, ref, watch} from "vue"
 
 const player = ref(null)
+const urlValidity = ref(false)
 
 const props = defineProps({
 	videoId: {
@@ -35,13 +36,6 @@ const props = defineProps({
 })
 
 watch(
-	[() => props.videoId, () => props.videoUrl],
-	([videoId, videoUrl]) => {
-		validate(videoId, videoUrl)
-	}
-)
-
-watch(
 	[() => props.width, () => props.height],
 	([width, height]) => {
 		if (player.value) {
@@ -51,44 +45,70 @@ watch(
 )
 
 watch(() => props.videoId, (videoId) => {
-	if (player.value && videoId) {
-		if (props.playerVars?.autoplay === 1) {
-			loadVideoById({
-				videoId,
-				startSeconds: props.playerVars.start || 0,
-				endSeconds: props.playerVars.end || 0,
-			})
+	debounce(() => {
+		onVideoIdChange(videoId)
+	}, 300)()
+})
+
+function onVideoIdChange(videoId) {
+	validate()
+	if (urlValidity.value) {
+		if (player.value) {
+			if (props.playerVars?.autoplay === 1) {
+				loadVideoById({
+					videoId,
+					startSeconds: props.playerVars.start || 0,
+					endSeconds: props.playerVars.end || 0,
+				})
+			} else {
+				cueVideoById({
+					videoId,
+					startSeconds: props.playerVars.start || 0,
+					endSeconds: props.playerVars.end || 0,
+				})
+			}
 		} else {
-			cueVideoById({
-				videoId,
-				startSeconds: props.playerVars.start || 0,
-				endSeconds: props.playerVars.end || 0,
-			})
+			createPlayer()
 		}
 	}
-})
+}
 
 watch(() => props.videoUrl, (videoUrl) => {
-	if (player.value && videoUrl) {
-		if (props.playerVars?.autoplay) {
-			loadVideoByUrl({
-				videoUrl,
-				startSeconds: props.playerVars.start || 0,
-				endSeconds: props.playerVars.end || 0,
-			})
-		} else {
-			cueVideoByUrl({
-				videoUrl,
-				startSeconds: props.playerVars.start || 0,
-				endSeconds: props.playerVars.end || 0,
-			})
-		}
-	}
+	debounce(() => {
+		onVideoUrlChange(videoUrl)
+	}, 500)()
 })
 
-function validate(videoId, videoUrl) {
+function onVideoUrlChange(videoUrl) {
+	validate()
+	if (urlValidity.value) {
+		if (player.value) {
+			if (props.playerVars?.autoplay) {
+				loadVideoByUrl({
+					mediaContentUrl: videoUrl,
+					startSeconds: props.playerVars.start || 0,
+					endSeconds: props.playerVars.end || 0,
+				})
+			} else {
+				cueVideoByUrl({
+					mediaContentUrl: videoUrl,
+					startSeconds: props.playerVars.start || 0,
+					endSeconds: props.playerVars.end || 0,
+				})
+			}
+		} else {
+			createPlayer()
+		}
+	}
+}
+
+function validate() {
+	const videoId = props.videoId
+	const videoUrl = props.videoUrl
 	if (!videoId && !videoUrl) {
-		console.error("At least one of the props \"videoId\" or \"videoUrl\" must be provided.")
+		urlValidity.value = false
+		console.error("At least one of the props 'videoId' or 'videoUrl' must be provided.")
+		return
 	}
 	if (!videoId && videoUrl) {
 		if (!getVideoIdFromYoutubeURL(videoUrl)) {
@@ -96,8 +116,11 @@ function validate(videoId, videoUrl) {
 				"If you are sure it is a valid YouTube URL and you are still getting this error,",
 				"please open an issue on GitHub at https://github.com/kiranparajuli589/vue3-ytframe/issues/new"
 			)
+			urlValidity.value = false
+			return
 		}
 	}
+	urlValidity.value = true
 }
 
 const playerId = ref(null)
@@ -110,7 +133,9 @@ onMounted(async () => {
 
 	loadAPI().then(() => {
 		checkIfYTLoaded().then(() => {
-			createPlayer()
+			if (urlValidity.value) {
+				createPlayer()
+			}
 		})
 	})
 })
@@ -122,7 +147,7 @@ function loadAPI() {
 	const tag = document.createElement("script")
 	tag.src = "https://www.youtube.com/iframe_api"
 	document.head.appendChild(tag)
-	console.info("Youtube API script added")
+	console.info("Youtube API script added to the HTML document.")
 	return Promise.resolve()
 }
 
@@ -479,6 +504,7 @@ function getIframe() {
  */
 function destroy() {
 	player.value.destroy()
+	player.value = null
 }
 
 /**
@@ -577,6 +603,24 @@ function getVideoIdFromYoutubeURL(url) {
 		return match.groups.id
 	} else {
 		return null
+	}
+}
+
+/**
+ * Debounce function
+ */
+function debounce(func, wait, immediate) {
+	var timeout
+	return function () {
+		var context = this, args = arguments
+		var later = function () {
+			timeout = null
+			if (!immediate) func.apply(context, args)
+		}
+		var callNow = immediate && !timeout
+		clearTimeout(timeout)
+		timeout = setTimeout(later, wait)
+		if (callNow) func.apply(context, args)
 	}
 }
 

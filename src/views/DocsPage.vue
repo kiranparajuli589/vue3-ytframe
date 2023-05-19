@@ -9,10 +9,7 @@
 				<div>
 					<p>Output</p>
 					<div class="player">
-						<VueYtframe
-							video-id="PvIL-Ycz6HI"
-							:player-vars="{ autoplay: 0, listType: 'user_uploads' }"
-						/>
+						<VueYtframe video-id="PvIL-Ycz6HI" :player-vars="{ autoplay: 0, listType: 'user_uploads' }" />
 					</div>
 				</div>
 			</DocSection>
@@ -22,7 +19,10 @@
 			<DocSection :doc-item="ExampleSection">
 				<div>
 					<h3>1. Basic Usage</h3>
-					<p>With the use of the event <code>onStateChange</code> the following piece of code will not allow two players to run concurrently in the same page.</p>
+					<p>
+						With the use of the event <code>onStateChange</code> the following piece of code
+						will not allow two players to run concurrently in the same page.
+					</p>
 					<CodeBlock :code="Example1" />
 				</div>
 			</DocSection>
@@ -31,9 +31,9 @@
 </template>
 <script setup>
 import DocsNav from "../components/DocsNav.vue"
-import {onMounted, ref, watch} from "vue"
+import { onMounted, ref, watch } from "vue"
 import hljs from "highlight.js"
-import {useRouter} from "vue-router"
+import { useRouter } from "vue-router"
 import {
 	ComponentEvents, ComponentMethods,
 	ComponentProps,
@@ -108,12 +108,15 @@ const initializeHeaderRefs = () => {
 	})
 }
 
-const {currentRoute} = useRouter()
+const { currentRoute } = useRouter()
 
 const scrollToHeading = (headingId) => {
 	const header = document.getElementById(headingId)
+	console.log(header)
 	if (header) {
-		header.scrollIntoView({behavior: "smooth", block: "start"})
+		setTimeout(() => {
+			header.scrollIntoView({ behavior: "smooth" })
+		}, 100)
 	}
 }
 
@@ -171,13 +174,13 @@ const scrollToHeadingIfRefExists = () => {
 		position: relative;
 	}
 
-	pre > code {
+	pre>code {
 		border-radius: 4px !important;
 		background: #f0f0f0 !important;
 		max-height: 50dvh;
 	}
 
-	pre > button {
+	pre>button {
 		position: absolute;
 		right: 1%;
 		top: 8px;
@@ -213,11 +216,11 @@ const scrollToHeadingIfRefExists = () => {
 }
 
 body.theme--dark {
-	pre > code {
+	pre>code {
 		background: #272727 !important;
 	}
 
-	pre > button {
+	pre>button {
 		color: #fff;
 		background: #1a1a1a;
 	}

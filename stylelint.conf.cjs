@@ -10,8 +10,6 @@ module.exports = {
 		customSyntax: "postcss-scss"
 	}],
 	rules: {
-		"selector-list-comma-space-after": "always",
-		"selector-list-comma-newline-after": null,
 		"value-no-vendor-prefix": null,
 		"property-no-vendor-prefix": null,
 		"selector-class-pattern": null,
