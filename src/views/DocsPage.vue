@@ -19,8 +19,10 @@
 			<DocSection :doc-item="ExampleSection">
 				<div>
 					<h3>1. Basic Usage</h3>
-					<p>With the use of the event <code>onStateChange</code> the following piece of code will not allow two players
-						to run concurrently in the same page.</p>
+					<p>
+						With the use of the event <code>onStateChange</code> the following piece of code
+						will not allow two players to run concurrently in the same page.
+					</p>
 					<CodeBlock :code="Example1" />
 				</div>
 			</DocSection>

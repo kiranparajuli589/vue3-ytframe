@@ -225,15 +225,6 @@ const playerParameters = computed(() => {
 	return obj
 })
 
-const clearVideoIdInput = () => {
-	videoId.value = ""
-	document.getElementById("video-id").value = ""
-}
-const clearVideoUrlInput = () => {
-	videoUrl.value = ""
-	document.getElementById("video-url").value = ""
-}
-
 const yt = ref(null)
 const destroyPlayer = () => {
 	if (yt.value) {
