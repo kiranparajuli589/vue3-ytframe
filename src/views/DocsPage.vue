@@ -24,6 +24,13 @@
 						will not allow two players to run concurrently in the same page.
 					</p>
 					<CodeBlock :code="Example1" />
+
+					<p>Output</p>
+					<VueYtframe v-for="id in videosSet" :key="id" :video-id="id"
+						@state-change="onStateChange" ref="yt"
+						:player-vars="{ autoplay: 0, listType: 'user_uploads' }"
+						height="300"
+					/>
 				</div>
 			</DocSection>
 		</div>
@@ -35,13 +42,10 @@ import { onMounted, ref, watch } from "vue"
 import hljs from "highlight.js"
 import { useRouter } from "vue-router"
 import {
-	ComponentEvents, ComponentMethods,
-	ComponentProps,
-	Example1, ExampleSection, GettingStarted,
 	getTitleID,
-	Installation,
-	MinimalExample,
-	WhyVueYtframe
+	ComponentEvents, ComponentMethods, ComponentProps,
+	Example1, ExampleSection, GettingStarted,
+	Installation, MinimalExample, WhyVueYtframe
 } from "../helper.js"
 import CodeBlock from "../components/CodeBlock.vue"
 import DocSection from "../components/DocSection.vue"
@@ -112,7 +116,6 @@ const { currentRoute } = useRouter()
 
 const scrollToHeading = (headingId) => {
 	const header = document.getElementById(headingId)
-	console.log(header)
 	if (header) {
 		setTimeout(() => {
 			header.scrollIntoView({ behavior: "smooth" })
@@ -133,6 +136,23 @@ const scrollToHeadingIfRefExists = () => {
 	}
 }
 
+const yt = ref(null)
+const videosSet = [
+	"KZNDqHI8AW4",
+	"_60Q8Xg4Mp0",
+]
+
+// a handler where no two or more frames are allowed to play simultaneously
+const onStateChange = (event) => {
+	if (event.getPlayerState() === 1) {
+		// control the frames using the template reference
+		yt.value.forEach((video) => {
+			if (video.getVideoUrl() !== event.getVideoUrl()) {
+				video.pauseVideo()
+			}
+		})
+	}
+}
 </script>
 <style lang="scss">
 .docs {
