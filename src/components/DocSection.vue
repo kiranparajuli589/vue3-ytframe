@@ -29,3 +29,8 @@ defineProps({
 	}
 })
 </script>
+<style scoped lang="sass">
+section
+	max-width: 800px
+	margin: 0 auto
+</style>

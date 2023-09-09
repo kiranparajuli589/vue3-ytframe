@@ -9,17 +9,18 @@ const getCode = (code) => {
 }
 
 export const MinimalExample = `<template>
-	<div class="player">
-		<VueYtframe
-			video-id="kGb9ftWR3l8"
-			:player-vars="{ autoplay: 0, listType: 'user_uploads' }"
-		/>
-</div>
+  <div class="player">
+    <VueYtframe
+      video-id="kGb9ftWR3l8"
+      :player-vars="{ autoplay: 0, listType: 'user_uploads' }"
+    />
+  </div>
 </template>
+
 <style>
 .player {
-	height: 400px;
-	max-width: 600px;
+  height: 400px;
+  max-width: 600px;
 }
 </style>`
 
@@ -189,24 +190,25 @@ export const Example1 = `<template>
     />
   </div>
 </template>
-<script setup>
-import {ref} from "vue";
-// declare a template reference
-const yt = ref(null)
-const videosSet = [
-  "kGb9ftWR3l8",
-  "U_0iZpQPPoA",
-]
 
-// a handler where no two or more frames are allowed to play simultaneously
-const onStateChange = (event) => {
-  if (event.getPlayerState() === 1) {
-    // control the frames using the template reference
-    yt.value.forEach((video) => {
-      if (video.getVideoUrl() !== event.getVideoUrl()) {
-        video.pauseVideo()
-      }
-    })
+<script setup>
+  import {ref} from "vue";
+  // declare a template reference
+  const yt = ref(null)
+  const videosSet = [
+    "kGb9ftWR3l8",
+    "U_0iZpQPPoA",
+  ]
+
+  // a handler where no two or more frames are allowed to play simultaneously
+  const onStateChange = (event) => {
+    if (event.getPlayerState() === 1) {
+      // control the frames using the template reference
+      yt.value.forEach((video) => {
+        if (video.getVideoUrl() !== event.getVideoUrl()) {
+          video.pauseVideo()
+        }
+      })
+    }
   }
-}
 </script>`

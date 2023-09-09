@@ -21,11 +21,11 @@
 					<h3>1. Basic Usage</h3>
 					<p>
 						With the use of the event <code>onStateChange</code> the following piece of code
-						will not allow two players to run concurrently in the same page.
+						will not allow two players to run concurrently.
 					</p>
 					<CodeBlock :code="Example1" />
 
-					<p>Output</p>
+					<h4>Output</h4>
 					<VueYtframe v-for="id in videosSet" :key="id" :video-id="id"
 						@state-change="onStateChange" ref="yt"
 						:player-vars="{ autoplay: 0, listType: 'user_uploads' }"
@@ -158,12 +158,13 @@ const onStateChange = (event) => {
 .docs {
 	height: calc(100vh - v-bind(appBarHeight) - v-bind(footerHeight));
 	position: relative;
+	padding-bottom: 3rem;
 }
 
 .docs-content {
+	overflow: auto;
 	padding: 1rem 20px v-bind(footerHeight) 220px;
 	height: calc(100vh - v-bind(appBarHeight) - v-bind(footerHeight));
-	overflow: auto;
 
 	@media only screen and (max-width: 600px) {
 		padding-left: 1rem;
@@ -174,11 +175,15 @@ const onStateChange = (event) => {
 	}
 
 	h2 {
-		margin-bottom: 2rem;
+		margin-block: 1.5rem 1rem;
 	}
 
 	h3 {
 		margin-bottom: 1rem;
+	}
+
+	h4 {
+		margin-bottom: .5rem;
 	}
 
 	p, li {
@@ -192,11 +197,13 @@ const onStateChange = (event) => {
 	pre {
 		margin-bottom: 1rem;
 		position: relative;
+		border-radius: 4px;
+		background: #e6e6e6 !important;
 	}
 
-	pre>code {
+	code, pre>code {
 		border-radius: 4px !important;
-		background: #f0f0f0 !important;
+		background: #e6e6e6 !important;
 		max-height: 50dvh;
 	}
 
@@ -225,19 +232,23 @@ const onStateChange = (event) => {
 		td, th {
 			padding: .5rem;
 			border: 1px solid grey;
-
-			code {
-				outline: 1px solid grey;
-				border-radius: 6px;
-				padding: .2rem .4rem;
-			}
 		}
+	}
+	code {
+		outline: 1px solid grey;
+		border-radius: 6px;
+		padding: .2rem .4rem;
+	}
+	iframe {
+		margin-block: .5rem;
+		border-radius: 8px;
 	}
 }
 
 body.theme--dark {
-	pre>code {
-		background: #272727 !important;
+	pre, code, pre>code {
+		background: #303030 !important;
+		color: rgb(170, 170, 170);
 	}
 
 	pre>button {
