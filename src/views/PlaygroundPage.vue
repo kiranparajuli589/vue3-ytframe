@@ -24,13 +24,13 @@
 					<input id="video-url" type="url" v-model="videoUrl">
 				</div>
 			</div>
-			<div>
-				<div class="title">Width</div>
-				<input type="range" min="100" max="1000" v-model="width" class="slider" id="player-width">
+			<div style="display: flex; flex-direction: column; flex-grow: 1;">
+				<div class="title">Width ({{ width }}/800)</div>
+				<input type="range" min="100" max="800" v-model="width" class="slider" id="player-width">
 			</div>
-			<div>
-				<div class="title">Height</div>
-				<input type="range" min="100" max="1000" v-model="height" class="slider" id="player-height">
+			<div style="display: flex; flex-direction: column; flex-grow: 1;">
+				<div class="title">Height ({{ height }}/600)</div>
+				<input type="range" min="100" max="600" v-model="height" class="slider" id="player-height">
 			</div>
 			<div class="player-parameters">
 				<div class="title">Player Parameters</div>
@@ -240,12 +240,16 @@ const destroyPlayer = () => {
 	font-size: .875rem;
 	overflow: auto;
 	padding: 1rem 1rem 20rem;
+	max-width: 1000px;
+	margin: 0 auto;
 
 	.player {
 		margin-block: 1rem;
 		border-radius: 4px;
 		border: 1px solid grey;
 		width: fit-content;
+		max-width: 800px;
+		max-height: 600px;
 	}
 
 	.actions, .props {
