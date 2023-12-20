@@ -596,7 +596,7 @@ function loadPlaylist(playlist, index, startSeconds) {
  * @returns {string|null}
  */
 function getVideoIdFromYoutubeURL(url) {
-	const regex = /^https:\/\/(?:(?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu.be\/|youtube\.com\/embed\/)(?<id>[a-zA-Z0-9_-]+)(?:\&.*)$/gm
+	const regex = /^https:\/\/(?:(?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu.be\/|youtube\.com\/embed\/)(?<id>[a-zA-Z0-9_-]+)(?:&.*)$/gm
 	regex.lastIndex = 0
 	const match = regex.exec(url)
 	if (match) {

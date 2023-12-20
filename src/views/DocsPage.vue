@@ -204,7 +204,7 @@ const onStateChange = (event) => {
 	code, pre>code {
 		border-radius: 4px !important;
 		background: #e6e6e6 !important;
-		max-height: 50dvh;
+		max-height: 50vh;
 	}
 
 	pre>button {
