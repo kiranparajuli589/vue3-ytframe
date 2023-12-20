@@ -47,24 +47,24 @@
 		"stylelint:fix": "stylelint src lib --config stylelint.conf.cjs --fix"
 	},
 	"dependencies": {
-		"highlight.js": "^11.8.0",
-		"vue": "^3.3.4"
+		"highlight.js": "^11.9.0",
+		"vue": "^3.3.13"
 	},
 	"devDependencies": {
-		"@mdi/font": "^7.2.96",
-		"@vitejs/plugin-vue": "^4.3.4",
-		"eslint": "^8.49.0",
-		"eslint-plugin-vue": "^9.17.0",
-		"pinia": "^2.1.6",
-		"postcss": "^8.4.29",
+		"@mdi/font": "^7.3.67",
+		"@vitejs/plugin-vue": "^4.5.2",
+		"eslint": "^8.56.0",
+		"eslint-plugin-vue": "^9.19.2",
+		"pinia": "^2.1.7",
+		"postcss": "^8.4.32",
 		"postcss-html": "^1.5.0",
-		"sass": "^1.66.1",
-		"stylelint": "^15.10.3",
+		"sass": "^1.69.5",
+		"stylelint": "^15.11.0",
 		"stylelint-config-recommended-scss": "^9.0.1",
 		"stylelint-config-recommended-vue": "^1.5.0",
 		"stylelint-config-standard": "^31.0.0",
-		"vite": "^4.4.9",
-		"vue-router": "^4.2.4"
+		"vite": "^4.5.1",
+		"vue-router": "^4.2.5"
 	},
 	"license": "GPL-3.0"
 }
