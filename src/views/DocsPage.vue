@@ -201,6 +201,12 @@ const onStateChange = (event) => {
 		background: #e6e6e6 !important;
 	}
 
+	code {
+		outline: 1px solid grey;
+		border-radius: 6px;
+		padding: .2rem .4rem;
+	}
+
 	code, pre>code {
 		border-radius: 4px !important;
 		background: #e6e6e6 !important;
@@ -234,11 +240,7 @@ const onStateChange = (event) => {
 			border: 1px solid grey;
 		}
 	}
-	code {
-		outline: 1px solid grey;
-		border-radius: 6px;
-		padding: .2rem .4rem;
-	}
+
 	iframe {
 		margin-block: .5rem;
 		border-radius: 8px;
@@ -248,7 +250,7 @@ const onStateChange = (event) => {
 body.theme--dark {
 	pre, code, pre>code {
 		background: #303030 !important;
-		color: rgb(170, 170, 170);
+		color: rgb(170 170 170);
 	}
 
 	pre>button {
