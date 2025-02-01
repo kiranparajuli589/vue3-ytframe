@@ -1,17 +1,15 @@
 on:
   push:
     branches:
-      - 'master'
-  pull_request:
-
-name: CI
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  lint:
+  build:
+    name: Publish to NPM
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,13 +22,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: EsLint
-        run: pnpm lint
+      - name: Build
+        run: pnpm build-lib
 
-      - name: Stylelint
-        run: pnpm stylelint
+      - name: Publish
+        run: pnpm publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
