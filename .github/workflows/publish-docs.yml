@@ -18,8 +18,11 @@ jobs:
   build:
     name: Publish Docs
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with: ${{ github.head_ref }}
 
       - uses: pnpm/action-setup@v4
         with:
@@ -38,11 +41,17 @@ jobs:
       - name: Build
         run: pnpm build-docs
 
-      - name: Commit and push changes
-        run: |
-          if [[ -n $(git status -s) ]]; then
-              git config --global user.email "vue3ytframe@users.noreply.github.com"
-              git config --global user.name "Vue3 Ytframe Bot"
-              git commit -am "Update docs $(date -Iseconds)"
-              git push
-          fi
+#      - name: Commit and push changes
+#        run: |
+#          if [[ -n $(git status -s) ]]; then
+#              git config --global user.email "vue3ytframe@users.noreply.github.com"
+#              git config --global user.name "Vue3 Ytframe Bot"
+#              git commit -am "Update docs $(date -Iseconds)"
+#              git push
+#          fi
+
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update docs $(date -Iseconds)
+          commit_user_name: ${{ github.actor }}
