@@ -1,4 +1,4 @@
-import{r as Ge,o as ie,c as oe,b as re,F as De,d as Me,t as we,_ as zc,u as Ee,e as Ur,f as Kc,g as $c,h as Qc,i as Xc,w as Zc,j as ue,k as Fr,l as Br}from"./index-16d0bf94.js";import{V as Gr}from"./VueYtframe-b3343276.js";const Ir=n=>n.replace(/\?/g,"").replace(/\s/g,"-").toLowerCase(),he=n=>`<code>${n.toString().trim()}</code>`,Jc=`<template>
+import{r as Ge,o as ie,c as oe,b as re,F as De,d as Me,t as we,_ as zc,u as Ee,e as Ur,f as Kc,g as $c,h as Qc,i as Xc,w as Zc,j as ue,k as Fr,l as Br}from"./index-395141a9.js";import{V as Gr}from"./VueYtframe-0ec49117.js";const Ir=n=>n.replace(/\?/g,"").replace(/\s/g,"-").toLowerCase(),he=n=>`<code>${n.toString().trim()}</code>`,Jc=`<template>
   <div class="player">
     <VueYtframe
       video-id="kGb9ftWR3l8"
