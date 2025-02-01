@@ -15,7 +15,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version_changed: ${{ steps.check.outputs.version_changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get previous version
+        id: previous
+        run: echo "PREV_VERSION=$(git show HEAD^:package.json | jq -r .version)" >> $GITHUB_ENV
+
+      - name: Get current version
+        id: current
+        run: echo "CURR_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+      - name: Check if version changed
+        id: check
+        run: |
+          if [ "$PREV_VERSION" != "$CURR_VERSION" ]; then
+            echo "version_changed=true" >> $GITHUB_ENV
+          else
+            echo "version_changed=false" >> $GITHUB_ENV
+          fi
+
   build:
+    needs: check-version
     name: Publish to NPM
     runs-on: ubuntu-latest
     steps:
