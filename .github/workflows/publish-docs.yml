@@ -4,11 +4,11 @@ on:
       - master
 
     paths:
-        - 'src/**'
-        - '.github/workflows/publish-docs.yml'
-        - 'package.json'
-        - 'pnpm-lock.yaml'
-        - 'vite.config.js'
+      - 'src/**'
+      - '.github/workflows/publish-docs.yml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'vite.config.js'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -22,7 +22,6 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-        with: ${{ github.head_ref }}
 
       - uses: pnpm/action-setup@v4
         with:
