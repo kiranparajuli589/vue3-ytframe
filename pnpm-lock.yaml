@@ -15,8 +15,8 @@ importers:
         specifier: ^3.3.13
         version: 3.3.13
       vue3-ytframe:
-        specifier: ^0.4.0
-        version: 0.4.0
+        specifier: ^0.4.1
+        version: 0.4.1
     devDependencies:
       '@mdi/font':
         specifier: ^7.3.67
@@ -1281,8 +1281,8 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
-  vue3-ytframe@0.4.0:
-    resolution: {integrity: sha512-0uNGDJ0tETs/Nnqky5evEHTk5Qnb0w/A8sURVRqBturZfXiQzVcVL/RMN6N0orATnHtWK9hTgOO2rRbebVvtcQ==}
+  vue3-ytframe@0.4.1:
+    resolution: {integrity: sha512-BDQa4NKClDlBNKdHl0AttidmXDjf1QxHwtqRwDy7+8wOeg+c1YRIvUSYtkHcx9km5G1aJ6+7I659ZVsDDzC/4Q==}
 
   vue@3.3.13:
     resolution: {integrity: sha512-LDnUpQvDgsfc0u/YgtAgTMXJlJQqjkxW1PVcOnJA5cshPleULDjHi7U45pl2VJYazSSvLH8UKcid/kzH8I0a0Q==}
@@ -2506,7 +2506,7 @@ snapshots:
       '@vue/devtools-api': 6.5.1
       vue: 3.3.13
 
-  vue3-ytframe@0.4.0:
+  vue3-ytframe@0.4.1:
     dependencies:
       highlight.js: 11.9.0
       vue: 3.3.13
