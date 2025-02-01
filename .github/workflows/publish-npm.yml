@@ -2,6 +2,13 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'lib/**'
+      - 'publish-npm.yml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'vite.config.js'
+      - 'README.md'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

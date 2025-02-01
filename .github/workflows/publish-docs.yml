@@ -3,13 +3,20 @@ on:
     branches:
       - master
 
+    paths:
+        - 'src/**'
+        - '.github/workflows/publish-docs.yml'
+        - 'package.json'
+        - 'pnpm-lock.yaml'
+        - 'vite.config.js'
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    name: Publish to NPM
+    name: Publish Docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,9 +41,8 @@ jobs:
       - name: Commit and push changes
         run: |
           if [[ -n $(git status -s) ]]; then
-              git config --global user.email "github-actions[bot]@users.noreply.github.com"
-              git config --global user.name "github-actions[bot]"
-              git add .
-              git commit -m "docs: update docs"
+              git config --global user.email "vue3ytframe@users.noreply.github.com"
+              git config --global user.name "Vue3 Ytframe Bot"
+              git commit -am "Update docs $(date -Iseconds)"
               git push
           fi
