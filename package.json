@@ -48,7 +48,8 @@
 	},
 	"dependencies": {
 		"highlight.js": "^11.9.0",
-		"vue": "^3.3.13"
+		"vue": "^3.3.13",
+		"vue3-ytframe": "^0.4.0"
 	},
 	"devDependencies": {
 		"@mdi/font": "^7.3.67",
