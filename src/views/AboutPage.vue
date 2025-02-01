@@ -1,6 +1,6 @@
 <template>
 	<div class="about">
-		<h2>About VueYtframe</h2>
+		<h2>About Vue3-Ytframe</h2>
 		<hr>
 		<div>Name: <span>{{pkg.name}}</span></div>
 		<div>Version: <span>{{pkg.version}}</span></div>
