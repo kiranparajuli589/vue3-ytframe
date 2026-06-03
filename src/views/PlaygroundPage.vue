@@ -271,6 +271,7 @@ const destroyPlayer = () => {
 
 	.text-input {
 		position: relative;
+
 		// width: fit-content;
 	}
 

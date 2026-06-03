@@ -156,7 +156,7 @@ function checkIfYTLoaded() {
 		return Promise.resolve()
 	}
 	// recursively check if the YT object is loaded
-	// eslint-disable-next-line no-unused-vars
+	 
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			checkIfYTLoaded().then(() => {

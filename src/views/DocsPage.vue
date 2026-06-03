@@ -166,7 +166,7 @@ const onStateChange = (event) => {
 	padding: 1rem 20px v-bind(footerHeight) 220px;
 	height: calc(100vh - v-bind(appBarHeight) - v-bind(footerHeight));
 
-	@media only screen and (max-width: 600px) {
+	@media only screen and (width <= 600px) {
 		padding-left: 1rem;
 	}
 

@@ -65,7 +65,7 @@ const scrollToItem = (title) => {
 	height: 100%;
 	border-right: 1px solid grey;
 
-	@media only screen and (max-width: 600px) {
+	@media only screen and (width <= 600px) {
 		display: none;
 	}
 
