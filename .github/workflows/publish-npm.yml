@@ -4,11 +4,12 @@ on:
       - master
     paths:
       - 'lib/**'
-      - 'publish-npm.yml'
+      - '.github/workflows/publish-npm.yml'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'vite.config.js'
       - 'README.md'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
