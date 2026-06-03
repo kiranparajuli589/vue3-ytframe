@@ -194,29 +194,6 @@ const onStateChange = (event) => {
 		padding-left: 1rem;
 	}
 
-	blockquote.doc-note {
-		margin: 1.25rem 0 1.5rem;
-		padding: 1rem 1.25rem;
-		border-left: 4px solid #c4302b;
-		border-radius: 4px;
-		background: rgba(196, 48, 43, 0.08);
-
-		p {
-			line-height: 1.8;
-			code {
-				padding: .1rem;
-			}
-			&:last-child {
-				margin-bottom: 0;
-			}
-		}
-
-		.mdi {
-			vertical-align: middle;
-			margin-right: 0.25rem;
-		}
-	}
-
 	pre {
 		margin-bottom: 1rem;
 		position: relative;
@@ -280,10 +257,35 @@ body.theme--dark {
 		color: #fff;
 		background: #1a1a1a;
 	}
+}
 
-	.docs-content blockquote.doc-note {
-		background: rgba(196, 48, 43, 0.15);
+.docs-content blockquote.doc-note {
+	margin: 1.25rem 0 1.5rem;
+	padding: 1rem 1.25rem;
+	border-left: 4px solid #c4302b;
+	border-radius: 4px;
+	background: rgb(196 48 43 / 8%);
+
+	p {
+		line-height: 1.8;
+
+		code {
+			padding: .1rem;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
+
+	.mdi {
+		vertical-align: middle;
+		margin-right: 0.25rem;
+	}
+}
+
+body.theme--dark .docs-content blockquote.doc-note {
+	background: rgb(196 48 43 / 15%);
 }
 
 .player {
