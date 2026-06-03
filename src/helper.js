@@ -45,7 +45,12 @@ export const Installation = {
 import VueYtframe from "vue3-ytframe"
 
 const app = createApp()
-app.use(VueYtframe).mount("#app")</code></pre>`
+app.use(VueYtframe).mount("#app")</code></pre>
+		<blockquote class="doc-note">
+			<p><span class="mdi mdi-information-outline" /> <strong>SSR (Nuxt, Quasar, etc.)</strong></p>
+			<p>From <code>0.4.3</code> onward, the package ships a <code>.cjs</code> build so Node SSR servers can <code>require()</code> the library without <code>ERR_REQUIRE_ESM</code>.</p>
+			<p>VueYtframe still uses the browser YouTube Iframe API (<code>document</code>, <code>window</code>). Render the player <strong>client-only</strong> in SSR apps—for example, wrap it with Quasar <code>QNoSsr</code> or your framework's equivalent.</p>
+		</blockquote>`
 }
 
 export const GettingStarted = {

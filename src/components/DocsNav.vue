@@ -29,6 +29,9 @@ const docItems = ref([
 				title: "Why VueYtframe?",
 			},
 			{
+				title: "Installation",
+			},
+			{
 				title: "Getting Started",
 			}
 		]
