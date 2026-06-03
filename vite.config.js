@@ -17,7 +17,8 @@ export default defineConfig(({command, mode}) => {
 						// eslint-disable-next-line no-undef
 						entry: resolve(__dirname, "lib/index.js"),
 						name: "VueYtframe",
-						fileName: (format) => `ytframe.${format}.js`
+						formats: ["es", "umd", "cjs"],
+						fileName: (format) => format === "cjs" ? "ytframe.cjs" : `ytframe.${format}.js`
 					},
 					rollupOptions: {
 						external: ["vue"],

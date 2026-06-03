@@ -15,7 +15,7 @@
 	"files": [
 		"dist"
 	],
-	"main": "dist/ytframe.umd.js",
+	"main": "dist/ytframe.cjs",
 	"browser": "dist/ytframe.umd.js",
 	"unpkg": "dist/ytframe.umd.js",
 	"jsdelivr": "dist/ytframe.umd.js",
@@ -23,7 +23,7 @@
 	"exports": {
 		".": {
 			"import": "./dist/ytframe.es.js",
-			"require": "./dist/ytframe.umd.js"
+			"require": "./dist/ytframe.cjs"
 		}
 	},
 	"sideEffects": false,
