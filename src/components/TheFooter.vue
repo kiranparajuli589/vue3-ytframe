@@ -1,7 +1,7 @@
 <template>
 	<div class="footer">
 		<div>Released under the <span class="bold">GPL-3 License</span></div>
-		<div>Copyright <span class="mdi mdi-copyright"/> 2022-2023 Kiran Parajuli</div>
+		<div>Copyright <span class="mdi mdi-copyright"/> 2022-2026 Kiran Parajuli</div>
 	</div>
 </template>
 <style lang="scss">

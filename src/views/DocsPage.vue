@@ -38,7 +38,7 @@
 </template>
 <script setup>
 import DocsNav from "../components/DocsNav.vue"
-import { onMounted, ref, watch } from "vue"
+import { nextTick, onMounted, onUnmounted, ref, watch } from "vue"
 import hljs from "highlight.js"
 import { useRouter } from "vue-router"
 import {
@@ -54,47 +54,39 @@ import VueYtframe from "../../lib/VueYtframe.vue"
 const appBarHeight = ref(0)
 const footerHeight = ref(0)
 
-onMounted(() => {
-	waitTillAppBarAndFooterLoads()
-		.then(() => {
-			handleResize()
-			window.addEventListener("resize", handleResize)
-			initializeCodeCopy()
-			initializeHeaderRefs()
-			hljs.highlightAll()
-			scrollToHeadingIfRefExists()
-		})
+onMounted(async () => {
+	// The app bar and footer live in App.vue and are already mounted by now;
+	// nextTick guarantees this view's own DOM is painted before we measure it.
+	await nextTick()
+	handleResize()
+	window.addEventListener("resize", handleResize)
+	initializeCodeCopy()
+	initializeHeaderRefs()
+	hljs.highlightAll()
+	scrollToHeadingIfRefExists()
+})
+
+onUnmounted(() => {
+	window.removeEventListener("resize", handleResize)
 })
 
 function handleResize() {
-	appBarHeight.value = `${document.querySelector(".app-bar").offsetHeight.toString()}px`
-	footerHeight.value = `${document.querySelector(".footer").offsetHeight.toString()}px`
-}
-
-function waitTillAppBarAndFooterLoads() {
-	return new Promise((resolve) => {
-		let appBar = document.querySelector(".app-bar")
-		let footer = document.querySelector(".footer")
-		if (appBar && footer) {
-			resolve()
-		} else {
-			setTimeout(() => {
-				waitTillAppBarAndFooterLoads()
-					.then(() => {
-						resolve()
-					})
-			}, 100)
-		}
-	})
+	const appBar = document.querySelector(".app-bar")
+	const footer = document.querySelector(".footer")
+	if (appBar) appBarHeight.value = `${appBar.offsetHeight}px`
+	if (footer) footerHeight.value = `${footer.offsetHeight}px`
 }
 
 const initializeCodeCopy = () => {
-	const codeBlocks = document.querySelectorAll("pre code")
-	codeBlocks.forEach((codeBlock) => {
+	document.querySelectorAll("pre code").forEach((codeBlock) => {
+		const pre = codeBlock.parentNode
+		if (!pre || pre.querySelector(".copy-button")) return // idempotent
 		const copyButton = document.createElement("button")
+		copyButton.type = "button"
 		copyButton.classList.add("copy-button")
-		copyButton.innerHTML = "<span class=\"mdi mdi-content-copy\" />"
-		codeBlock.parentNode.appendChild(copyButton)
+		copyButton.setAttribute("aria-label", "Copy code to clipboard")
+		copyButton.innerHTML = "<span class=\"mdi mdi-content-copy\" aria-hidden=\"true\" />"
+		pre.appendChild(copyButton)
 		copyButton.addEventListener("click", () => {
 			navigator.clipboard.writeText(codeBlock.innerText)
 		})
@@ -102,11 +94,12 @@ const initializeCodeCopy = () => {
 }
 
 const initializeHeaderRefs = () => {
-	const headers = document.querySelectorAll(".docs-content h2")
-	headers.forEach((header) => {
+	document.querySelectorAll(".docs-content h2").forEach((header) => {
+		if (header.querySelector(".header-link")) return // idempotent
 		const link = document.createElement("a")
 		link.classList.add("header-link")
-		link.innerHTML = "<span class=\"mdi mdi-link-variant\" />"
+		link.setAttribute("aria-label", `Link to ${header.textContent}`)
+		link.innerHTML = "<span class=\"mdi mdi-link-variant\" aria-hidden=\"true\" />"
 		link.href = `/vue3-ytframe/#/docs/ref=${getTitleID(header.innerText)}`
 		header.appendChild(link)
 	})
@@ -163,22 +156,33 @@ const onStateChange = (event) => {
 
 .docs-content {
 	overflow: auto;
-	padding: 1rem 20px v-bind(footerHeight) 220px;
+	padding: 1.5rem 1.5rem v-bind(footerHeight) 244px;
 	height: calc(100vh - v-bind(appBarHeight) - v-bind(footerHeight));
+	scroll-behavior: smooth;
 
 	@media only screen and (width <= 600px) {
-		padding-left: 1rem;
+		padding-left: 1.25rem;
 	}
 
 	section {
-		margin-bottom: 3rem;
+		margin-bottom: 3.5rem;
 	}
 
 	h2 {
-		margin-block: 1.5rem 1rem;
+		display: flex;
+		align-items: center;
+		gap: .4rem;
+		font-size: 1.7rem;
+		font-weight: 800;
+		letter-spacing: -.5px;
+		margin-block: 1.5rem 1.25rem;
+		padding-bottom: .5rem;
+		border-bottom: 1px solid var(--border);
 	}
 
 	h3 {
+		font-size: 1.25rem;
+		font-weight: 700;
 		margin-bottom: 1rem;
 	}
 
@@ -188,99 +192,148 @@ const onStateChange = (event) => {
 
 	p, li {
 		margin-bottom: .8rem;
+		line-height: 1.7;
 	}
 
 	.content-list {
-		padding-left: 1rem;
+		padding-left: 1.25rem;
+	}
+
+	/* ---- Code ---- */
+	code {
+		font-family: monospace;
+		font-size: .85em;
+		background: var(--code-bg);
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		padding: .12rem .4rem;
 	}
 
 	pre {
-		margin-bottom: 1rem;
 		position: relative;
-		border-radius: 4px;
-		background: #e6e6e6 !important;
+		margin-bottom: 1.25rem;
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		background: var(--code-bg);
+		overflow: auto;
+		max-height: 60vh;
+
+		code {
+			display: block;
+			border: 0;
+			background: transparent;
+			padding: 1rem 1.1rem;
+			font-size: .85rem;
+			line-height: 1.6;
+		}
 	}
 
-	code {
-		outline: 1px solid grey;
-		border-radius: 6px;
-		padding: .2rem .4rem;
-	}
-
-	code, pre>code {
-		border-radius: 4px !important;
-		background: #e6e6e6 !important;
-		max-height: 50vh;
-	}
-
-	pre>button {
+	.copy-button {
 		position: absolute;
-		right: 1%;
-		top: 8px;
-		font-size: 12px;
-		padding: .2rem;
+		top: .5rem;
+		right: .5rem;
+		display: inline-flex;
+		align-items: center;
+		font-size: .95rem;
+		padding: .25rem .4rem;
+		color: var(--muted);
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: 7px;
 		cursor: pointer;
+		opacity: 0;
+		transition: opacity .15s, color .15s, border-color .15s;
+
+		&:hover {
+			color: var(--vue-color);
+			border-color: var(--vue-color);
+		}
 	}
 
+	.copy-button:focus-visible,
+	pre:hover .copy-button {
+		opacity: 1;
+	}
+
+	/* ---- Heading anchors ---- */
 	.header-link {
-		font-size: 1.2rem;
-		padding-inline: .4rem;
-		cursor: pointer;
+		display: inline-flex;
+		font-size: 1.1rem;
+		color: var(--muted);
+		text-decoration: none;
+		opacity: 0;
+		transition: opacity .15s, color .15s;
+
+		&:hover {
+			color: var(--vue-color);
+		}
 	}
 
-	table {
-		border: 1px solid grey;
+	h2:hover .header-link {
+		opacity: 1;
+	}
 
-		th {
+	/* ---- Tables ---- */
+	table {
+		width: 100%;
+		border-collapse: separate;
+		border-spacing: 0;
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		overflow: hidden;
+		margin-bottom: 1.25rem;
+
+		th, td {
+			padding: .65rem .8rem;
+			border-bottom: 1px solid var(--border);
 			text-align: left;
+			vertical-align: top;
 		}
 
-		td, th {
-			padding: .5rem;
-			border: 1px solid grey;
+		th {
+			background: var(--surface-2);
+			font-weight: 700;
+		}
+
+		tbody tr:last-child td {
+			border-bottom: 0;
+		}
+
+		tbody tr:hover {
+			background: var(--surface-2);
 		}
 	}
 
 	iframe {
 		margin-block: .5rem;
-		border-radius: 8px;
-	}
-}
-
-body.theme--dark {
-	pre, code, pre>code {
-		background: #303030 !important;
-		color: rgb(170 170 170);
+		border-radius: 10px;
 	}
 
-	pre>button {
-		color: #fff;
-		background: #1a1a1a;
-	}
-}
+	/* ---- Note callout ---- */
+	blockquote.doc-note {
+		margin: 1.25rem 0 1.5rem;
+		padding: 1rem 1.25rem;
+		border: 1px solid rgb(196 48 43 / 30%);
+		border-left: 4px solid #c4302b;
+		border-radius: 10px;
+		background: rgb(196 48 43 / 8%);
 
-.docs-content blockquote.doc-note {
-	margin: 1.25rem 0 1.5rem;
-	padding: 1rem 1.25rem;
-	border-left: 4px solid #c4302b;
-	border-radius: 4px;
-	background: rgb(196 48 43 / 8%);
+		p {
+			line-height: 1.8;
 
-	p {
-		line-height: 1.8;
+			code {
+				padding: .1rem .3rem;
+			}
 
-		code {
-			padding: .1rem;
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
 
-		&:last-child {
-			margin-bottom: 0;
+		.mdi {
+			vertical-align: middle;
+			margin-right: .25rem;
 		}
-	}
-
-	.mdi {
-		vertical-align: middle;
-		margin-right: 0.25rem;
 	}
 }
 

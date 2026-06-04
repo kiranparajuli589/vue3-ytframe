@@ -2,16 +2,13 @@
 	<aside class="docs-nav">
 		<h2 class="docs-nav--title">Docs</h2>
 		<ul class="docs-nav--list">
-			<li v-for="(doc, n) in docItems" :key="n"
-				class="docs-nav--item"
-			>
-				<header>{{doc.title}}</header>
+			<li v-for="(doc, n) in docItems" :key="n" class="docs-nav--group">
+				<header class="docs-nav--group-title">{{ doc.title }}</header>
 				<ul class="docs-nav--inner-list">
-					<li v-for="(item, index) in doc.items" :key="index"
-						class="docs-nav--inner-item"
-						@click="scrollToItem(item.title)"
-					>
-						<header>{{item.title}}</header>
+					<li v-for="(item, index) in doc.items" :key="index">
+						<button type="button" class="docs-nav--link" @click="scrollToItem(item.title)">
+							{{ item.title }}
+						</button>
 					</li>
 				</ul>
 			</li>
@@ -60,44 +57,69 @@ const scrollToItem = (title) => {
 <style lang="scss">
 .docs-nav {
 	position: absolute;
-	width: 200px;
-	padding: 1rem;
+	width: 220px;
+	padding: 1.5rem 1rem;
 	height: 100%;
-	border-right: 1px solid grey;
+	overflow-y: auto;
+	border-right: 1px solid var(--border);
+	background: var(--surface-2);
 
 	@media only screen and (width <= 600px) {
 		display: none;
 	}
 
 	&--title {
-		margin-bottom: 2rem;
+		font-size: 1.4rem;
+		font-weight: 800;
+		letter-spacing: -.5px;
+		margin-bottom: 1.5rem;
 	}
 
 	&--list {
 		list-style: none;
 	}
 
-	&--item {
+	&--group {
 		margin-bottom: 1.5rem;
 	}
 
-	&--item > header {
-		font-size: 1.2rem;
-		font-weight: 600;
-		margin-bottom: 1em;
-		border-bottom: 1px solid grey;
-		width: fit-content;
-		padding-inline: .2rem;
+	&--group-title {
+		font-size: .75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: .06em;
+		color: var(--muted);
+		margin-bottom: .5rem;
+		padding-inline: .6rem;
 	}
 
 	&--inner-list {
 		list-style: none;
-		padding-left: .2rem;
+		display: flex;
+		flex-direction: column;
+		gap: .15rem;
 	}
 
-	&--inner-item {
-		margin-bottom: 0.7rem;
+	&--link {
+		display: block;
+		width: 100%;
+		text-align: left;
+		font: inherit;
+		font-size: .9rem;
+		color: inherit;
+		padding: .4rem .6rem;
+		border: 0;
+		border-left: 2px solid transparent;
+		border-radius: 6px;
+		background: transparent;
 		cursor: pointer;
+		transition: background .15s, color .15s, border-color .15s;
+
+		&:hover {
+			background: var(--surface);
+			color: var(--vue-color);
+			border-left-color: var(--vue-color);
+		}
 	}
 }
 </style>

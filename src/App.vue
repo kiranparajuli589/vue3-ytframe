@@ -46,7 +46,16 @@ watch(isDark, (val) => {
 	--vue-color: #42b883;
 }
 
-body:not([theme-dark]) {
+/* Shared design tokens (light defaults; overridden under .theme--dark) */
+body {
+	--surface: #fff;
+	--surface-2: #f6f7f9;
+	--border: #e4e6ea;
+	--muted: #6b7280;
+	--code-bg: #f3f4f6;
+}
+
+body:not(.theme--dark) {
 	/* stylelint-disable-next-line */
 	@include meta.load-css("highlight.js/styles/github.css");
 }
@@ -55,6 +64,12 @@ body:not([theme-dark]) {
 body.theme--dark {
 	/* stylelint-disable-next-line */
 	@include meta.load-css("highlight.js/styles/github-dark.css");
+
+	--surface: #242424;
+	--surface-2: #1c1c1c;
+	--border: #383838;
+	--muted: #9ca3af;
+	--code-bg: #2a2a2a;
 
 	background-color: #1a1a1a;
 	color: #fff;
