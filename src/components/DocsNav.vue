@@ -1,12 +1,22 @@
 <template>
-	<aside class="docs-nav">
-		<h2 class="docs-nav--title">Docs</h2>
-		<ul class="docs-nav--list">
-			<li v-for="(doc, n) in docItems" :key="n" class="docs-nav--group">
-				<header class="docs-nav--group-title">{{ doc.title }}</header>
-				<ul class="docs-nav--inner-list">
+	<aside class="docs-nav absolute h-full w-[220px] overflow-y-auto border-r border-border bg-surface-2 p-6 max-[600px]:hidden">
+		<h2 class="mb-6 text-2xl font-extrabold tracking-tight">Docs</h2>
+		<ul class="list-none">
+			<li v-for="(doc, n) in docItems" :key="n" class="mb-6">
+				<header class="mb-2 px-2.5 text-xs font-bold uppercase tracking-wider text-muted">
+					{{ doc.title }}
+				</header>
+				<ul class="flex list-none flex-col gap-0.5">
 					<li v-for="(item, index) in doc.items" :key="index">
-						<button type="button" class="docs-nav--link" @click="scrollToItem(item.title)">
+						<button
+							type="button"
+							class="block w-full cursor-pointer rounded-md border-0 border-l-2 px-2.5 py-1.5 text-left text-[0.9rem] transition-colors"
+							:class="isActive(item.title)
+								? 'border-accent bg-surface font-semibold text-accent'
+								: 'border-transparent bg-transparent text-inherit hover:border-accent hover:bg-surface hover:text-accent'"
+							:aria-current="isActive(item.title) ? 'location' : undefined"
+							@click="scrollToItem(item.title)"
+						>
 							{{ item.title }}
 						</button>
 					</li>
@@ -16,22 +26,22 @@
 	</aside>
 </template>
 <script setup>
-import { ref } from "vue"
+import {ref} from "vue"
+import {useRouter} from "vue-router"
+import useDocsActiveSection from "../composables/useDocsActiveSection.js"
 import {getTitleID} from "../helper.js"
+
+const router = useRouter()
+const {activeId} = useDocsActiveSection()
+
 const docItems = ref([
 	{
 		title: "Introduction",
 		items: [
-			{
-				title: "Why VueYtframe?",
-			},
-			{
-				title: "Installation",
-			},
-			{
-				title: "Getting Started",
-			}
-		]
+			{title: "Why VueYtframe?"},
+			{title: "Installation"},
+			{title: "Getting Started"},
+		],
 	},
 	{
 		title: "API",
@@ -39,87 +49,21 @@ const docItems = ref([
 			{title: "Props"},
 			{title: "Events"},
 			{title: "Methods"},
-		]
+		],
 	},
 	{
 		title: "Illustrations",
 		items: [
 			{title: "Examples"},
-		]
-	}
+		],
+	},
 ])
 
+const isActive = (title) => activeId.value === getTitleID(title)
+
 const scrollToItem = (title) => {
-	const el = document.getElementById(getTitleID(title))
-	el.scrollIntoView({behavior: "smooth", block: "center"})
+	const id = getTitleID(title)
+	activeId.value = id
+	router.push({name: "Docs", params: {ref: id}})
 }
 </script>
-<style lang="scss">
-.docs-nav {
-	position: absolute;
-	width: 220px;
-	padding: 1.5rem 1rem;
-	height: 100%;
-	overflow-y: auto;
-	border-right: 1px solid var(--border);
-	background: var(--surface-2);
-
-	@media only screen and (width <= 600px) {
-		display: none;
-	}
-
-	&--title {
-		font-size: 1.4rem;
-		font-weight: 800;
-		letter-spacing: -.5px;
-		margin-bottom: 1.5rem;
-	}
-
-	&--list {
-		list-style: none;
-	}
-
-	&--group {
-		margin-bottom: 1.5rem;
-	}
-
-	&--group-title {
-		font-size: .75rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: .06em;
-		color: var(--muted);
-		margin-bottom: .5rem;
-		padding-inline: .6rem;
-	}
-
-	&--inner-list {
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		gap: .15rem;
-	}
-
-	&--link {
-		display: block;
-		width: 100%;
-		text-align: left;
-		font: inherit;
-		font-size: .9rem;
-		color: inherit;
-		padding: .4rem .6rem;
-		border: 0;
-		border-left: 2px solid transparent;
-		border-radius: 6px;
-		background: transparent;
-		cursor: pointer;
-		transition: background .15s, color .15s, border-color .15s;
-
-		&:hover {
-			background: var(--surface);
-			color: var(--vue-color);
-			border-left-color: var(--vue-color);
-		}
-	}
-}
-</style>

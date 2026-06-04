@@ -1,0 +1,9 @@
+@use "sass:meta";
+
+body:not(.theme--dark) {
+	@include meta.load-css("highlight.js/styles/github.css");
+}
+
+body.theme--dark {
+	@include meta.load-css("highlight.js/styles/github-dark.css");
+}

@@ -1,117 +1,32 @@
 <template>
 	<div class="home-page">
-		<div class="home-page--tagline">
-			A YouTube Iframe API Wrapper
+		<div class="text-gradient-hero px-4 pb-[5vh] pt-[20vh] text-center text-[clamp(20px,5vw,76px)] font-black leading-tight tracking-tight max-w-[960px] mx-auto">
+			A fully typed YouTube Iframe API wrapper
 		</div>
-		<div class="home-page--subtitle">
-			An easy to use extension to embed YouTube videos into web using the full power provided by the Iframe API.
+		<div class="mb-[4vh] text-center text-[clamp(0.875rem,1.5vw,1.2rem)]">
+			Embed YouTube in Vue 3 with the complete Iframe API — typed props, events, and player methods, zero runtime dependencies beyond Vue.
 		</div>
-		<div class="home-page--actions">
-			<a class="button" href="/vue3-ytframe/#/docs/ref=why-vueytframe">
-				<div class="mdi mdi-motion-play-outline" />
+		<div class="my-4 flex flex-wrap items-center justify-center">
+			<a
+				class="button mx-4 flex min-h-10 cursor-pointer flex-wrap items-center justify-center rounded-md bg-accent px-4 text-[clamp(0.8rem,1.5vw,1rem)] text-accent-foreground! no-underline hover:bg-accent-hover!"
+				href="/vue3-ytframe/#/docs/ref=why-vueytframe"
+			>
+				<span class="mdi mdi-motion-play-outline ml-0 mr-2 text-2xl" aria-hidden="true" />
 				<span>Why VueYtframe</span>
 			</a>
 
-			<a class="button" href="/vue3-ytframe/#/docs/ref=getting-started">
+			<a
+				class="button mx-4 flex min-h-10 cursor-pointer flex-wrap items-center justify-center rounded-md px-4 text-[clamp(0.8rem,1.5vw,1rem)] no-underline bg-code text-accent-foreground hover:bg-accent-hover! hover:text-white! transition-colors duration-300 ease-out"
+				href="/vue3-ytframe/#/docs/ref=getting-started"
+			>
 				Get Started
-				<div class="mdi mdi-arrow-right-bold-box-outline" />
+				<span class="mdi mdi-arrow-right-bold-box-outline mr-0 ml-2 text-2xl" aria-hidden="true" />
 			</a>
 
-			<a class="button" href="/vue3-ytframe/#/docs/ref=installation">Install</a>
+			<a
+				class="button mx-4 flex min-h-10 cursor-pointer flex-wrap items-center justify-center rounded-md px-4 text-[clamp(0.8rem,1.5vw,1rem)] no-underline text-accent-foreground bg-code hover:bg-accent-hover! hover:text-white! transition-colors duration-300 ease-out"
+				href="/vue3-ytframe/#/docs/ref=installation"
+			>Install</a>
 		</div>
 	</div>
 </template>
-<style lang="scss">
-.home-page {
-	&--tagline {
-		padding-block: 20vh 5vh;
-		text-align: center;
-		font-size: clamp(20px, 5vw, 76px);
-		line-height: 1.25;
-		font-weight: 900;
-		letter-spacing: -1.5px;
-		max-width: 960px;
-		margin: 0 auto;
-		background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
-		background-clip: text;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
-
-	&--subtitle {
-		text-align: center;
-		font-size: clamp(.875rem, 1.5vw, 1.2rem);
-		margin-bottom: 4vh;
-	}
-
-	&--actions {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-block: 1rem;
-		flex-wrap: wrap;
-
-		& > .button {
-			margin: 1rem;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-wrap: wrap;
-			padding-inline: 1rem;
-			border-radius: 6px;
-			font-size: clamp(.8rem, 1.5vw, 1rem);
-			min-height: 40px;
-			cursor: pointer;
-			text-decoration: none;
-
-			&:hover {
-				background: #e1e1e1;
-			}
-
-			.mdi {
-				font-size: 1.6rem;
-				margin: 0 .5rem;
-			}
-
-			.mdi-arrow-right-bold-box-outline {
-				margin-right: 0
-			}
-
-			.mdi-motion-play-outline {
-				margin-left: 0
-			}
-		}
-
-		.button:nth-child(1) {
-			background: var(--vue-color);
-			color: white;
-
-			&:hover {
-				background: #339066;
-			}
-		}
-	}
-}
-
-body.theme--dark {
-	.home-page {
-		&--tagline {
-			background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
-			background-clip: text;
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-		}
-
-		&--actions {
-			.button:nth-child(2), .button:nth-child(3) {
-				background: #3a3939;
-				color: white;
-
-				&:hover {
-					background: #2f2f2f;
-				}
-			}
-		}
-	}
-}
-</style>

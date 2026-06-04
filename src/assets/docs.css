@@ -1,0 +1,174 @@
+/* Shared documentation prose (HTML from helper.js + DocSection) */
+
+.docs-content {
+	scroll-behavior: smooth;
+}
+
+.docs-content section {
+	margin-bottom: 3.5rem;
+}
+
+.docs-content h2 {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-size: 1.7rem;
+	font-weight: 800;
+	letter-spacing: -0.5px;
+	margin-block: 1.5rem 1.25rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--border);
+}
+
+.docs-content h3 {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+
+.docs-content h4 {
+	margin-bottom: 0.5rem;
+}
+
+.docs-content p,
+.docs-content li {
+	margin-bottom: 0.8rem;
+	line-height: 1.7;
+}
+
+.docs-content .content-list {
+	padding-left: 1.25rem;
+}
+
+.docs-content code {
+	font-family: monospace;
+	font-size: 0.85em;
+	background: var(--code-bg);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	padding: 0.12rem 0.4rem;
+}
+
+.docs-content pre {
+	position: relative;
+	margin-bottom: 1.25rem;
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	background: var(--code-bg);
+	overflow: auto;
+	max-height: 60vh;
+}
+
+.docs-content pre code {
+	display: block;
+	border: 0;
+	background: transparent;
+	padding: 1rem 1.1rem;
+	font-size: 0.85rem;
+	line-height: 1.6;
+}
+
+.docs-content .copy-button {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	display: inline-flex;
+	align-items: center;
+	font-size: 0.95rem;
+	padding: 0.25rem 0.4rem;
+	color: var(--muted);
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 7px;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.docs-content .copy-button:hover {
+	color: var(--vue-color);
+	border-color: var(--vue-color);
+}
+
+.docs-content .copy-button:focus-visible,
+.docs-content pre:hover .copy-button {
+	opacity: 1;
+}
+
+.docs-content .header-link {
+	display: inline-flex;
+	font-size: 1.1rem;
+	color: var(--muted);
+	text-decoration: none;
+	opacity: 0;
+	transition: opacity 0.15s, color 0.15s;
+}
+
+.docs-content .header-link:hover {
+	color: var(--vue-color);
+}
+
+.docs-content h2:hover .header-link {
+	opacity: 1;
+}
+
+.docs-content table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	overflow: hidden;
+	margin-bottom: 1.25rem;
+}
+
+.docs-content th,
+.docs-content td {
+	padding: 0.65rem 0.8rem;
+	border-bottom: 1px solid var(--border);
+	text-align: left;
+	vertical-align: top;
+}
+
+.docs-content th {
+	background: var(--surface-2);
+	font-weight: 700;
+}
+
+.docs-content tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+.docs-content tbody tr:hover {
+	background: var(--surface-2);
+}
+
+.docs-content iframe {
+	border-radius: 10px;
+}
+
+.docs-content blockquote.doc-note {
+	margin: 1.25rem 0 1.5rem;
+	padding: 1rem 1.25rem;
+	border: 1px solid var(--danger-border);
+	border-left: 4px solid var(--danger);
+	border-radius: 10px;
+	background: var(--danger-subtle);
+}
+
+.docs-content blockquote.doc-note p {
+	line-height: 1.8;
+}
+
+.docs-content blockquote.doc-note p:last-child {
+	margin-bottom: 0;
+}
+
+.docs-content blockquote.doc-note code {
+	padding: 0.1rem 0.3rem;
+}
+
+.docs-content blockquote.doc-note .mdi {
+	vertical-align: middle;
+	margin-right: 0.25rem;
+}

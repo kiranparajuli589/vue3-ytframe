@@ -3,6 +3,7 @@ import {fileURLToPath} from "node:url"
 import {defineConfig} from "vitest/config"
 import vue from "@vitejs/plugin-vue"
 import dts from "vite-plugin-dts"
+import tailwindcss from "@tailwindcss/vite"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -26,7 +27,7 @@ const test = {
 export default defineConfig(({command, mode}) => {
 	if (command === "serve") {
 		return {
-			plugins: [vue()],
+			plugins: [vue(), tailwindcss()],
 			test,
 		}
 	}
@@ -64,7 +65,7 @@ export default defineConfig(({command, mode}) => {
 
 	return {
 		base: "/vue3-ytframe/",
-		plugins: [vue()],
+		plugins: [vue(), tailwindcss()],
 		build: {
 			outDir: "docs",
 		},

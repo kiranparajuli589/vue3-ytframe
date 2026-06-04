@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@custom-variant theme-dark (body.theme--dark &);
+
+:root {
+	--vue-color: #42b883;
+	--vue-color-hover: #339066;
+	--accent-foreground: #fff;
+	--danger: #c4302b;
+	--gradient-from: #42d392;
+	--gradient-to: #647eff;
+	--shadow-sm: 0 1px 2px rgb(0 0 0 / 4%);
+}
+
+body {
+	--bg: #fff;
+	--surface: #fff;
+	--surface-2: #f6f7f9;
+	--border: #e4e6ea;
+	--muted: #6b7280;
+	--code-bg: #f3f4f6;
+	--accent-subtle: color-mix(in srgb, var(--vue-color) 12%, transparent);
+	--accent-border: color-mix(in srgb, var(--vue-color) 30%, transparent);
+	--danger-subtle: color-mix(in srgb, var(--danger) 8%, transparent);
+	--danger-border: color-mix(in srgb, var(--danger) 30%, transparent);
+	--btn-muted-hover: #e1e1e1;
+}
+
+@theme inline {
+	--color-surface: var(--surface);
+	--color-surface-2: var(--surface-2);
+	--color-border: var(--border);
+	--color-muted: var(--muted);
+	--color-code: var(--code-bg);
+	--color-accent: var(--vue-color);
+	--color-accent-hover: var(--vue-color-hover);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-danger: var(--danger);
+	--color-bg: var(--bg);
+}
+
+body.theme--dark {
+	--bg: #1a1a1a;
+	--text: #fff;
+	--surface: #242424;
+	--surface-2: #1c1c1c;
+	--border: #383838;
+	--muted: #9ca3af;
+	--code-bg: #2a2a2a;
+	--danger-subtle: color-mix(in srgb, var(--danger) 15%, transparent);
+	--btn-secondary-bg: #3a3939;
+	--btn-secondary-hover: #2f2f2f;
+
+	background-color: var(--bg);
+	color: var(--text);
+}
+
+a {
+	color: var(--vue-color);
+}
+
+@layer components {
+	.text-gradient-hero {
+		background: linear-gradient(315deg, var(--gradient-from) 25%, var(--gradient-to));
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}

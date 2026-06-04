@@ -1,102 +1,131 @@
 <template>
-	<div class="playground">
-		<header class="playground__header">
-			<h2 class="playground__title">Playground</h2>
-			<p class="playground__subtitle">
-				Drop in a video, resize the frame, and toggle player parameters to see them live.
-			</p>
-		</header>
+	<div
+		class="playground-layout relative pb-12"
+		:style="{ height: `calc(100vh - ${appBarHeight} - ${footerHeight})` }"
+	>
+		<div
+			class="playground overflow-auto px-6 pb-[var(--playground-footer-pad,0)]"
+			:style="{
+				'--playground-footer-pad': footerHeight,
+				height: `calc(100vh - ${appBarHeight} - ${footerHeight})`,
+			}"
+		>
+			<div class="mx-auto max-w-5xl">
+				<header class="playground__header">
+				<h2 class="playground__title">Playground</h2>
+				<p class="playground__subtitle">
+					Drop in a video, resize the frame, and toggle player parameters to see them live.
+				</p>
+			</header>
 
-		<section class="stage">
-			<div class="stage__frame" :class="{'stage__frame--empty': !videoId && !videoUrl}">
-				<VueYtframe
-					ref="yt"
-					:video-id="videoId"
-					:video-url="videoUrl"
-					:height="height"
-					:width="width"
-					:player-vars="playerParameters"
-				/>
-				<div v-if="!videoId && !videoUrl" class="stage__empty">
-					<span class="mdi mdi-youtube" aria-hidden="true" />
-					<p>Enter a YouTube video ID or URL below to load the player.</p>
+			<section class="stage">
+				<div class="stage__frame" :class="{'stage__frame--empty': !videoId && !videoUrl}">
+					<VueYtframe
+						ref="yt"
+						:video-id="videoId"
+						:video-url="videoUrl"
+						:height="height"
+						:width="width"
+						:player-vars="playerParameters"
+					/>
+					<div v-if="!videoId && !videoUrl" class="stage__empty">
+						<span class="mdi mdi-youtube" aria-hidden="true" />
+						<p>Enter a YouTube video ID or URL below to load the player.</p>
+					</div>
 				</div>
-			</div>
-			<div v-if="yt && yt.player" class="stage__actions">
-				<button type="button" class="btn btn--danger" @click="destroyPlayer()">
-					<span class="mdi mdi-close-circle-outline" aria-hidden="true" />
-					Destroy player
-				</button>
-			</div>
-		</section>
+				<div v-if="yt && yt.player" class="stage__actions">
+					<button type="button" class="btn btn--danger" @click="destroyPlayer()">
+						<span class="mdi mdi-close-circle-outline" aria-hidden="true" />
+						Destroy player
+					</button>
+				</div>
+			</section>
 
-		<section class="panel">
-			<h3 class="panel__title">Video source</h3>
-			<div class="grid">
-				<div class="field">
-					<label class="field__label" for="video-id">Video ID</label>
-					<input id="video-id" class="field__input" type="text" placeholder="e.g. kGb9ftWR3l8" v-model="videoId">
-				</div>
-				<div class="field">
-					<label class="field__label" for="video-url">Video URL</label>
-					<input id="video-url" class="field__input" type="url" placeholder="https://youtu.be/…" v-model="videoUrl">
-				</div>
-				<div class="field">
-					<label class="field__label" for="player-width">
-						Width <span class="field__value">{{ width }} / 800</span>
-					</label>
-					<input id="player-width" class="slider" type="range" min="100" max="800" v-model="width">
-				</div>
-				<div class="field">
-					<label class="field__label" for="player-height">
-						Height <span class="field__value">{{ height }} / 600</span>
-					</label>
-					<input id="player-height" class="slider" type="range" min="100" max="600" v-model="height">
-				</div>
-			</div>
-		</section>
-
-		<section class="panel">
-			<h3 class="panel__title">Player parameters</h3>
-			<div class="params-grid">
-				<div
-					v-for="field in paramFields"
-					:key="field.key"
-					class="control"
-					:class="{'control--toggle': field.type === 'checkbox'}"
-				>
-					<label class="control__label" :for="field.key">
-						{{ field.label }}
-						<a
-							class="control__ref"
-							:href="ppRef(field.refKey)"
-							target="_blank"
-							rel="noopener noreferrer"
-							:title="`${field.label} reference`"
+			<section class="panel">
+				<h3 class="panel__title">Video source</h3>
+				<div class="grid">
+					<div class="field">
+						<label class="field__label" for="video-id">Video ID</label>
+						<input
+							id="video-id"
+							class="field__input"
+							type="text"
+							placeholder="e.g. PvIL-Ycz6HI"
+							v-model="videoId"
 						>
-							<span class="mdi mdi-open-in-new" aria-hidden="true" />
-						</a>
-					</label>
-
-					<label v-if="field.type === 'checkbox'" class="toggle">
-						<input :id="field.key" type="checkbox" v-model="playerVars[field.key]">
-						<span class="toggle__slider" />
-					</label>
-					<input
-						v-else
-						:id="field.key"
-						class="control__input"
-						:type="field.type"
-						v-model="playerVars[field.key]"
-					>
+					</div>
+					<div class="field">
+						<label class="field__label" for="video-url">Video URL</label>
+						<input
+							id="video-url"
+							class="field__input"
+							type="url"
+							placeholder="https://www.youtube.com/watch?v=…"
+							v-model="videoUrl"
+						>
+					</div>
+					<div class="field">
+						<label class="field__label" for="player-width">
+							Width <span class="field__value">{{ width }} / 800</span>
+						</label>
+						<input id="player-width" class="slider" type="range" min="100" max="800" v-model="width">
+					</div>
+					<div class="field">
+						<label class="field__label" for="player-height">
+							Height <span class="field__value">{{ height }} / 600</span>
+						</label>
+						<input id="player-height" class="slider" type="range" min="100" max="600" v-model="height">
+					</div>
 				</div>
+			</section>
+
+			<section class="panel">
+				<h3 class="panel__title">Player parameters</h3>
+				<div class="params-grid">
+					<div
+						v-for="field in paramFields"
+						:key="field.key"
+						class="control"
+						:class="{'control--toggle': field.type === 'checkbox'}"
+					>
+						<label class="control__label" :for="field.key">
+							{{ field.label }}
+							<a
+								class="control__ref"
+								:href="ppRef(field.refKey)"
+								target="_blank"
+								rel="noopener noreferrer"
+								:title="`${field.label} reference`"
+							>
+								<span class="mdi mdi-open-in-new" aria-hidden="true" />
+							</a>
+						</label>
+
+						<label v-if="field.type === 'checkbox'" class="toggle">
+							<input :id="field.key" type="checkbox" v-model="playerVars[field.key]">
+							<span class="toggle__slider" />
+						</label>
+						<input
+							v-else
+							:id="field.key"
+							class="control__input"
+							:type="field.type"
+							:placeholder="field.placeholder"
+							v-model="playerVars[field.key]"
+						>
+					</div>
+				</div>
+			</section>
 			</div>
-		</section>
+		</div>
 	</div>
 </template>
 <script setup>
 import { computed, ref } from "vue"
+import useAppChromeHeights from "../composables/useAppChromeHeights.js"
 import VueYtframe from "../../lib/VueYtframe.vue"
+
+const {appBarHeight, footerHeight} = useAppChromeHeights()
 
 const videoId = ref("")
 const videoUrl = ref("")
@@ -114,18 +143,18 @@ const ppRef = (key) => {
 // the anchor on the YouTube player-parameters reference page.
 const paramFields = [
 	{ key: "autoplay", refKey: "autoplay", label: "Autoplay", type: "checkbox" },
-	{ key: "cc_lang_pref", refKey: "cc_lang_pref", label: "CC Lang Pref", type: "text" },
+	{ key: "cc_lang_pref", refKey: "cc_lang_pref", label: "CC Lang Pref", type: "text", placeholder: "e.g. en" },
 	{ key: "cc_load_policy", refKey: "cc_load_policy", label: "CC Load Policy", type: "checkbox" },
-	{ key: "color", refKey: "color", label: "Color", type: "text" },
+	{ key: "color", refKey: "color", label: "Color", type: "text", placeholder: "red or white" },
 	{ key: "controls", refKey: "controls", label: "Controls", type: "checkbox" },
 	{ key: "disablekb", refKey: "disablekb", label: "Disable KB", type: "checkbox" },
 	{ key: "enablejsapi", refKey: "enablejsapi", label: "Enable JS API", type: "checkbox" },
-	{ key: "start", refKey: "start", label: "Start (seconds)", type: "number" },
-	{ key: "end", refKey: "end", label: "End (seconds)", type: "number" },
+	{ key: "start", refKey: "start", label: "Start (seconds)", type: "number", placeholder: "e.g. 30" },
+	{ key: "end", refKey: "end", label: "End (seconds)", type: "number", placeholder: "e.g. 120" },
 	{ key: "fs", refKey: "fs", label: "Fullscreen", type: "checkbox" },
-	{ key: "hl", refKey: "hl", label: "Interface Language", type: "text" },
+	{ key: "hl", refKey: "hl", label: "Interface Language", type: "text", placeholder: "e.g. en, fr, ja" },
 	{ key: "iv_load_policy", refKey: "iv_load_policy", label: "IV Load Policy", type: "checkbox" },
-	{ key: "listType", refKey: "listType", label: "List Type", type: "text" },
+	{ key: "listType", refKey: "listType", label: "List Type", type: "text", placeholder: "e.g. playlist, user_uploads" },
 	{ key: "loop", refKey: "loop", label: "Loop", type: "checkbox" },
 	{ key: "modestbranding", refKey: "modestbranding", label: "Modest Branding", type: "checkbox" },
 	{ key: "playsinline", refKey: "playsinline", label: "Plays Inline", type: "checkbox" },
@@ -185,9 +214,7 @@ const destroyPlayer = () => {
 	--pg-stage: #f1f3f5;
 	--pg-toggle-track: #cdd2d8;
 
-	max-width: 1080px;
-	margin: 0 auto;
-	padding: 1.5rem 1rem 8rem;
+	padding: 1.5rem 1rem 0;
 	font-size: .9rem;
 
 	&__header {
