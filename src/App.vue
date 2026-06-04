@@ -46,7 +46,7 @@ watch(isDark, (val) => {
 	--vue-color: #42b883;
 }
 
-body:not([theme-dark]) {
+body:not(.theme--dark) {
 	/* stylelint-disable-next-line */
 	@include meta.load-css("highlight.js/styles/github.css");
 }

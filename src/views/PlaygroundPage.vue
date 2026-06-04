@@ -24,11 +24,11 @@
 					<input id="video-url" type="url" v-model="videoUrl">
 				</div>
 			</div>
-			<div style="display: flex; flex-direction: column; flex-grow: 1;">
+			<div class="field-col">
 				<div class="title">Width ({{ width }}/800)</div>
 				<input type="range" min="100" max="800" v-model="width" class="slider" id="player-width">
 			</div>
-			<div style="display: flex; flex-direction: column; flex-grow: 1;">
+			<div class="field-col">
 				<div class="title">Height ({{ height }}/600)</div>
 				<input type="range" min="100" max="600" v-model="height" class="slider" id="player-height">
 			</div>
@@ -37,7 +37,7 @@
 				<div>
 					<label for="autoplay">
 						Autoplay
-						(<a :href="ppRef('autoplay')" target="_blank">Ref</a>)
+						(<a :href="ppRef('autoplay')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input id="autoplay" type="checkbox" v-model="playerVars.autoplay">
 				</div>
@@ -45,7 +45,7 @@
 				<div>
 					<label for="cc-lang-pref">
 						CC Lang Pref
-						(<a :href="ppRef('cc_lang_pref')" target="_blank">Ref</a>)
+						(<a :href="ppRef('cc_lang_pref')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="text" id="cc-lang-pref" v-model="playerVars.cc_lang_pref">
 				</div>
@@ -53,7 +53,7 @@
 				<div>
 					<label for="cc-load-policy">
 						CC Load Policy
-						(<a :href="ppRef('cc_load_policy')" target="_blank">Ref</a>)
+						(<a :href="ppRef('cc_load_policy')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="cc-load-policy" v-model="playerVars.cc_load_policy">
 				</div>
@@ -61,7 +61,7 @@
 				<div>
 					<label for="color">
 						Color
-						(<a :href="ppRef('color')" target="_blank">Ref</a>)
+						(<a :href="ppRef('color')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="text" id="color" v-model="playerVars.color">
 				</div>
@@ -69,7 +69,7 @@
 				<div>
 					<label for="controls">
 						Controls
-						(<a :href="ppRef('controls')" target="_blank">Ref</a>)
+						(<a :href="ppRef('controls')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="controls" v-model="playerVars.controls">
 				</div>
@@ -77,7 +77,7 @@
 				<div>
 					<label for="disable-kb">
 						Disable KB
-						(<a :href="ppRef('disablekb')" target="_blank">Ref</a>)
+						(<a :href="ppRef('disablekb')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="disable-kb" v-model="playerVars.disablekb">
 				</div>
@@ -85,7 +85,7 @@
 				<div>
 					<label for="enable-js-api">
 						Enable JS API
-						(<a :href="ppRef('enablejsapi')" target="_blank">Ref</a>)
+						(<a :href="ppRef('enablejsapi')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="enable-js-api" v-model="playerVars.enablejsapi">
 				</div>
@@ -93,7 +93,7 @@
 				<div>
 					<label for="start">
 						Start (seconds)
-						(<a :href="ppRef('start')" target="_blank">Ref</a>)
+						(<a :href="ppRef('start')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="number" id="start" v-model="playerVars.start">
 				</div>
@@ -101,7 +101,7 @@
 				<div>
 					<label for="end">
 						End (seconds)
-						(<a :href="ppRef('end')" target="_blank">Ref</a>)
+						(<a :href="ppRef('end')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="number" id="end" v-model="playerVars.end">
 				</div>
@@ -109,7 +109,7 @@
 				<div>
 					<label for="fs">
 						FS
-						(<a :href="ppRef('fs')" target="_blank">Ref</a>)
+						(<a :href="ppRef('fs')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="fs" v-model="playerVars.fs">
 				</div>
@@ -117,7 +117,7 @@
 				<div>
 					<label for="hl">
 						HL
-						(<a :href="ppRef('hl')" target="_blank">Ref</a>)
+						(<a :href="ppRef('hl')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="text" id="hl" v-model="playerVars.hl">
 				</div>
@@ -125,7 +125,7 @@
 				<div>
 					<label for="iv-load-policy">
 						IV Load Policy
-						(<a :href="ppRef('iv_load_policy')" target="_blank">Ref</a>)
+						(<a :href="ppRef('iv_load_policy')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="iv-load-policy" v-model="playerVars.iv_load_policy">
 				</div>
@@ -133,7 +133,7 @@
 				<div>
 					<label for="list-type">
 						List Type
-						(<a :href="ppRef('listType')" target="_blank">Ref</a>)
+						(<a :href="ppRef('listType')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="text" id="list-type" v-model="playerVars.listType">
 				</div>
@@ -141,7 +141,7 @@
 				<div>
 					<label for="loop">
 						Loop
-						(<a :href="ppRef('loop')" target="_blank">Ref</a>)
+						(<a :href="ppRef('loop')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="loop" v-model="playerVars.loop">
 				</div>
@@ -149,7 +149,7 @@
 				<div>
 					<label for="modest-branding">
 						Modest Branding
-						(<a :href="ppRef('modestbranding')" target="_blank">Ref</a>)
+						(<a :href="ppRef('modestbranding')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="modest-branding" v-model="playerVars.modestbranding">
 				</div>
@@ -157,7 +157,7 @@
 				<div>
 					<label for="playsinline">
 						Plays Inline
-						(<a :href="ppRef('playsinline')" target="_blank">Ref</a>)
+						(<a :href="ppRef('playsinline')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="playsinline" v-model="playerVars.playsinline">
 				</div>
@@ -165,7 +165,7 @@
 				<div>
 					<label for="rel">
 						Rel
-						(<a :href="ppRef('rel')" target="_blank">Ref</a>)
+						(<a :href="ppRef('rel')" target="_blank" rel="noopener noreferrer">Ref</a>)
 					</label>
 					<input type="checkbox" id="rel" v-model="playerVars.rel">
 				</div>
@@ -306,6 +306,12 @@ const destroyPlayer = () => {
 		li {
 			margin-bottom: .5rem;
 		}
+	}
+
+	.field-col {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
 	}
 
 	.player-parameters {

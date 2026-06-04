@@ -1,31 +1,43 @@
 <template>
 	<header class="app-bar">
-		<a class="app-bar--head" href="/vue3-ytframe/#/">
-			<div class="mdi mdi-youtube" />
+		<RouterLink class="app-bar--head" :to="{name: 'Home'}">
+			<div class="mdi mdi-youtube" aria-hidden="true" />
 			<div class="app-bar--title">Vue3 Ytframe</div>
-		</a>
-		<div class="app-bar--actions">
-			<div class="link" @click="push({name: 'Home'})">Home</div>
-			<div class="link" @click="push({name: 'Docs'})">Docs</div>
-			<div class="link" @click="push({name: 'Playground'})">Playground</div>
-			<div class="link" @click="push({name: 'About'})">About</div>
+		</RouterLink>
+		<nav class="app-bar--actions" aria-label="Primary">
+			<RouterLink class="link" :to="{name: 'Home'}">Home</RouterLink>
+			<RouterLink class="link" :to="{name: 'Docs'}">Docs</RouterLink>
+			<RouterLink class="link" :to="{name: 'Playground'}">Playground</RouterLink>
+			<RouterLink class="link" :to="{name: 'About'}">About</RouterLink>
 			<div class="separator" />
-			<div class="theme-select" @click="toggleDark()" title="Toggle Theme">
-				<div v-if="isDark" class="mdi mdi-weather-night"/>
-				<div v-else class="mdi mdi-weather-sunny"/>
-			</div>
-			<a class="icon-link" href="https://github.com/kiranparajuli589/vue3-ytframe" title="GitHub" target="_blank">
-				<div class="mdi mdi-github" />
+			<button
+				type="button"
+				class="theme-select"
+				:aria-pressed="isDark"
+				:title="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
+				aria-label="Toggle theme"
+				@click="toggleDark()"
+			>
+				<div v-if="isDark" class="mdi mdi-weather-night" aria-hidden="true" />
+				<div v-else class="mdi mdi-weather-sunny" aria-hidden="true" />
+			</button>
+			<a
+				class="icon-link"
+				href="https://github.com/kiranparajuli589/vue3-ytframe"
+				title="GitHub"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<div class="mdi mdi-github" aria-hidden="true" />
 			</a>
-		</div>
+		</nav>
 	</header>
 </template>
 <script setup>
 import useAppStore from "../composables/useAppStore.js"
-import {useRouter} from "vue-router"
+import {RouterLink} from "vue-router"
 
 const {isDark, toggleDark} = useAppStore()
-const {push} = useRouter()
 </script>
 <style lang="scss">
 .app-bar {
@@ -67,6 +79,8 @@ const {push} = useRouter()
 			font-size: clamp(.875rem , 1.5vw, 1rem);
 			font-weight: 500;
 			cursor: pointer;
+			color: inherit;
+			text-decoration: none;
 
 			&:hover {
 				color: #34ab38;
@@ -91,6 +105,10 @@ const {push} = useRouter()
 		.theme-select {
 			position: relative;
 			outline: 1px solid grey;
+			border: 0;
+			padding: 0;
+			background: transparent;
+			color: inherit;
 			border-radius: 24px;
 			width: 40px;
 			height: 22px;

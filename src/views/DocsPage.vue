@@ -38,7 +38,7 @@
 </template>
 <script setup>
 import DocsNav from "../components/DocsNav.vue"
-import { onMounted, ref, watch } from "vue"
+import { nextTick, onMounted, onUnmounted, ref, watch } from "vue"
 import hljs from "highlight.js"
 import { useRouter } from "vue-router"
 import {
@@ -54,47 +54,39 @@ import VueYtframe from "../../lib/VueYtframe.vue"
 const appBarHeight = ref(0)
 const footerHeight = ref(0)
 
-onMounted(() => {
-	waitTillAppBarAndFooterLoads()
-		.then(() => {
-			handleResize()
-			window.addEventListener("resize", handleResize)
-			initializeCodeCopy()
-			initializeHeaderRefs()
-			hljs.highlightAll()
-			scrollToHeadingIfRefExists()
-		})
+onMounted(async () => {
+	// The app bar and footer live in App.vue and are already mounted by now;
+	// nextTick guarantees this view's own DOM is painted before we measure it.
+	await nextTick()
+	handleResize()
+	window.addEventListener("resize", handleResize)
+	initializeCodeCopy()
+	initializeHeaderRefs()
+	hljs.highlightAll()
+	scrollToHeadingIfRefExists()
+})
+
+onUnmounted(() => {
+	window.removeEventListener("resize", handleResize)
 })
 
 function handleResize() {
-	appBarHeight.value = `${document.querySelector(".app-bar").offsetHeight.toString()}px`
-	footerHeight.value = `${document.querySelector(".footer").offsetHeight.toString()}px`
-}
-
-function waitTillAppBarAndFooterLoads() {
-	return new Promise((resolve) => {
-		let appBar = document.querySelector(".app-bar")
-		let footer = document.querySelector(".footer")
-		if (appBar && footer) {
-			resolve()
-		} else {
-			setTimeout(() => {
-				waitTillAppBarAndFooterLoads()
-					.then(() => {
-						resolve()
-					})
-			}, 100)
-		}
-	})
+	const appBar = document.querySelector(".app-bar")
+	const footer = document.querySelector(".footer")
+	if (appBar) appBarHeight.value = `${appBar.offsetHeight}px`
+	if (footer) footerHeight.value = `${footer.offsetHeight}px`
 }
 
 const initializeCodeCopy = () => {
-	const codeBlocks = document.querySelectorAll("pre code")
-	codeBlocks.forEach((codeBlock) => {
+	document.querySelectorAll("pre code").forEach((codeBlock) => {
+		const pre = codeBlock.parentNode
+		if (!pre || pre.querySelector(".copy-button")) return // idempotent
 		const copyButton = document.createElement("button")
+		copyButton.type = "button"
 		copyButton.classList.add("copy-button")
-		copyButton.innerHTML = "<span class=\"mdi mdi-content-copy\" />"
-		codeBlock.parentNode.appendChild(copyButton)
+		copyButton.setAttribute("aria-label", "Copy code to clipboard")
+		copyButton.innerHTML = "<span class=\"mdi mdi-content-copy\" aria-hidden=\"true\" />"
+		pre.appendChild(copyButton)
 		copyButton.addEventListener("click", () => {
 			navigator.clipboard.writeText(codeBlock.innerText)
 		})
@@ -102,11 +94,12 @@ const initializeCodeCopy = () => {
 }
 
 const initializeHeaderRefs = () => {
-	const headers = document.querySelectorAll(".docs-content h2")
-	headers.forEach((header) => {
+	document.querySelectorAll(".docs-content h2").forEach((header) => {
+		if (header.querySelector(".header-link")) return // idempotent
 		const link = document.createElement("a")
 		link.classList.add("header-link")
-		link.innerHTML = "<span class=\"mdi mdi-link-variant\" />"
+		link.setAttribute("aria-label", `Link to ${header.textContent}`)
+		link.innerHTML = "<span class=\"mdi mdi-link-variant\" aria-hidden=\"true\" />"
 		link.href = `/vue3-ytframe/#/docs/ref=${getTitleID(header.innerText)}`
 		header.appendChild(link)
 	})

@@ -1,6 +1,6 @@
 {
 	"name": "vue3-ytframe",
-	"version": "0.4.4",
+	"version": "1.0.0",
 	"author": "Kiran Parajuli <kiranparajuli589@gmail.com>",
 	"description": "A Vue3 YouTube Iframe API Wrapper Component",
 	"type": "module",
@@ -20,14 +20,19 @@
 	"unpkg": "dist/ytframe.umd.cjs",
 	"jsdelivr": "dist/ytframe.umd.cjs",
 	"module": "dist/ytframe.es.js",
+	"types": "dist/lib/index.d.ts",
 	"exports": {
 		".": {
+			"types": "./dist/lib/index.d.ts",
 			"import": "./dist/ytframe.es.js",
 			"require": "./dist/ytframe.umd.cjs",
 			"default": "./dist/ytframe.es.js"
 		}
 	},
 	"sideEffects": false,
+	"dependencies": {
+		"@types/youtube": "^0.2.0"
+	},
 	"peerDependencies": {
 		"vue": "^3.5.0"
 	},
@@ -42,6 +47,7 @@
 	"engines": {
 		"node": ">=20.19.0"
 	},
+	"packageManager": "pnpm@10.33.2",
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"@parcel/watcher",
@@ -54,18 +60,27 @@
 		"build-docs": "vite build --mode docs",
 		"build": "pnpm build-lib && pnpm build-docs",
 		"preview": "vite preview",
+		"typecheck": "vue-tsc --noEmit",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
 		"lint": "eslint src lib",
 		"lint:fix": "eslint src lib --fix",
-		"stylelint": "stylelint \"src/**/*.{vue,scss,css}\" lib --config stylelint.conf.cjs",
-		"stylelint:fix": "stylelint \"src/**/*.{vue,scss,css}\" lib --config stylelint.conf.cjs --fix"
+		"stylelint": "stylelint \"src/**/*.{vue,scss,css}\" \"lib/**/*.{vue,scss,css}\" --config stylelint.conf.cjs",
+		"stylelint:fix": "stylelint \"src/**/*.{vue,scss,css}\" \"lib/**/*.{vue,scss,css}\" --config stylelint.conf.cjs --fix"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@mdi/font": "^7.4.47",
+		"@microsoft/api-extractor": "^7.58.7",
+		"@types/node": "^25.9.1",
 		"@vitejs/plugin-vue": "^6.0.7",
+		"@vitest/coverage-v8": "^4.1.8",
+		"@vue/test-utils": "^2.4.10",
 		"eslint": "^10.4.1",
 		"eslint-plugin-vue": "^10.9.2",
 		"globals": "^16.0.0",
+		"happy-dom": "^20.9.0",
 		"highlight.js": "^11.11.1",
 		"pinia": "^3.0.4",
 		"postcss-html": "^1.8.1",
@@ -73,10 +88,15 @@
 		"stylelint": "^17.12.0",
 		"stylelint-config-recommended-vue": "^1.6.1",
 		"stylelint-config-standard-scss": "^17.0.0",
+		"typescript": "^6.0.3",
+		"typescript-eslint": "^8.60.1",
 		"vite": "^8.0.16",
+		"vite-plugin-dts": "^5.0.2",
+		"vitest": "^4.1.8",
 		"vue": "^3.5.35",
 		"vue-eslint-parser": "^10.3.0",
-		"vue-router": "^5.1.0"
+		"vue-router": "^5.1.0",
+		"vue-tsc": "^3.3.3"
 	},
 	"license": "GPL-3.0"
 }

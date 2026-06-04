@@ -77,7 +77,7 @@ export const ComponentProps = {
 			"playerVars",
 			"Object",
 			getCode("{}"),
-			"The playerVars object to be passed to the YouTube Iframe API. (Ref: <a href=\"https://developers.google.com/youtube/player_parameters\" target=\"_blank\">Player Parameters</a>)"
+			"The playerVars object to be passed to the YouTube Iframe API. (Ref: <a href=\"https://developers.google.com/youtube/player_parameters\" target=\"_blank\" rel=\"noopener noreferrer\">Player Parameters</a>)"
 		], {
 			prop: "height",
 			type: "String, Number",

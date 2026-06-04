@@ -5,9 +5,9 @@
 		<div>Name: <span>{{pkg.name}}</span></div>
 		<div>Version: <span>{{pkg.version}}</span></div>
 		<div>Description: <span>{{pkg.description}}</span></div>
-		<div>Homepage: <span><a :href="pkg.homepage" target="_blank">{{pkg.homepage}}</a></span></div>
-		<div>Repository: <span><a :href="pkg.repository.url" target="_blank">{{pkg.repository.url}}</a></span></div>
-		<div>Issues: <span><a :href="pkg.bugs.url" target="_blank">{{pkg.bugs.url}}</a></span></div>
+		<div>Homepage: <span><a :href="pkg.homepage" target="_blank" rel="noopener noreferrer">{{pkg.homepage}}</a></span></div>
+		<div>Repository: <span><a :href="pkg.repository.url" target="_blank" rel="noopener noreferrer">{{pkg.repository.url}}</a></span></div>
+		<div>Issues: <span><a :href="pkg.bugs.url" target="_blank" rel="noopener noreferrer">{{pkg.bugs.url}}</a></span></div>
 		<div>Author: <span>{{pkg.author}}</span></div>
 		<div>License: <span>{{pkg.license}}</span></div>
 	</div>

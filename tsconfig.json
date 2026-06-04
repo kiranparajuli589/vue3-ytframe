@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"types": ["youtube", "vite/client", "node"],
+		"allowJs": true,
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"jsx": "preserve",
+		"noEmit": true,
+		"declaration": true,
+		"emitDeclarationOnly": true
+	},
+	"include": ["lib/**/*.ts", "lib/**/*.vue", "lib/**/*.d.ts"],
+	"exclude": ["node_modules", "dist", "docs"]
+}
