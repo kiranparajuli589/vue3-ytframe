@@ -51,6 +51,20 @@ watch(() => props.videoUrl, (videoUrl) => debouncedUrlChange(videoUrl))
 function onVideoIdChange(videoId: string | null): void {
 	validate()
 	if (!urlValidity.value || !videoId) return
+	loadOrCueById(videoId)
+}
+
+function onVideoUrlChange(videoUrl: string | null): void {
+	validate()
+	if (!urlValidity.value || !videoUrl) return
+	// The YT API's load/cueVideoByUrl only accept the ".../v/ID?version=3"
+	// format, so resolve the ID and reload via the reliable *ById methods.
+	const videoId = getVideoIdFromYoutubeURL(videoUrl)
+	if (videoId) loadOrCueById(videoId)
+}
+
+/** Reloads (autoplay) or cues a video by ID, creating the player if needed. */
+function loadOrCueById(videoId: string): void {
 	if (!player.value) {
 		createPlayer()
 		return
@@ -64,25 +78,6 @@ function onVideoIdChange(videoId: string | null): void {
 		player.value.loadVideoById(args)
 	} else {
 		player.value.cueVideoById(args)
-	}
-}
-
-function onVideoUrlChange(videoUrl: string | null): void {
-	validate()
-	if (!urlValidity.value || !videoUrl) return
-	if (!player.value) {
-		createPlayer()
-		return
-	}
-	const args = {
-		mediaContentUrl: videoUrl,
-		startSeconds: props.playerVars?.start || 0,
-		endSeconds: props.playerVars?.end || undefined,
-	}
-	if (props.playerVars?.autoplay === 1) {
-		player.value.loadVideoByUrl(args)
-	} else {
-		player.value.cueVideoByUrl(args)
 	}
 }
 

@@ -242,7 +242,9 @@ describe("VueYtframe — prop changes (debounced)", () => {
 		expect(p.loadVideoById).toHaveBeenCalledWith(expect.objectContaining({videoId: "U_0iZpQPPoA"}))
 	})
 
-	it("cues a new video by url", async () => {
+	it("reloads by resolved id when the videoUrl changes", async () => {
+		// load/cueVideoByUrl only accept the ".../v/ID?version=3" format, so a
+		// changed watch/short URL must reload via cueVideoById to actually work.
 		vi.useFakeTimers()
 		const wrapper = mount(VueYtframe, {props: {videoUrl: "https://youtu.be/kGb9ftWR3l8"}, attachTo: document.body})
 		await vi.runOnlyPendingTimersAsync()
@@ -251,8 +253,9 @@ describe("VueYtframe — prop changes (debounced)", () => {
 		wrapper.setProps({videoUrl: "https://youtu.be/U_0iZpQPPoA"})
 		await vi.advanceTimersByTimeAsync(500)
 
-		expect(p.cueVideoByUrl).toHaveBeenCalledWith(
-			expect.objectContaining({mediaContentUrl: "https://youtu.be/U_0iZpQPPoA"}),
+		expect(p.cueVideoById).toHaveBeenCalledWith(
+			expect.objectContaining({videoId: "U_0iZpQPPoA"}),
 		)
+		expect(p.cueVideoByUrl).not.toHaveBeenCalled()
 	})
 })

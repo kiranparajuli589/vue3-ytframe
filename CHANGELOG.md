@@ -32,6 +32,10 @@ are unchanged.
   debounced. Timing is now correct (300ms for `videoId`, 500ms for `videoUrl`).
 - **The player is destroyed on unmount.** Previously the `YT.Player` and its
   iframe leaked when the component unmounted; cleanup now runs automatically.
+- **Changing `videoUrl` now reloads the player.** The reactive handler used
+  `cueVideoByUrl`/`loadVideoByUrl`, which the YouTube API only accepts in the
+  `.../v/ID?version=3` format — so a normal watch/short URL silently did nothing.
+  It now resolves the video ID and reloads via `cueVideoById`/`loadVideoById`.
 - **Bounded API loading.** The recursive `window.YT` poll now times out instead
   of spinning forever when the YouTube script is blocked or offline.
 - Consistent autoplay detection between the `videoId` and `videoUrl` code paths.

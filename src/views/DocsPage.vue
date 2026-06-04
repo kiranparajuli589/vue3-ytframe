@@ -156,22 +156,33 @@ const onStateChange = (event) => {
 
 .docs-content {
 	overflow: auto;
-	padding: 1rem 20px v-bind(footerHeight) 220px;
+	padding: 1.5rem 1.5rem v-bind(footerHeight) 244px;
 	height: calc(100vh - v-bind(appBarHeight) - v-bind(footerHeight));
+	scroll-behavior: smooth;
 
 	@media only screen and (width <= 600px) {
-		padding-left: 1rem;
+		padding-left: 1.25rem;
 	}
 
 	section {
-		margin-bottom: 3rem;
+		margin-bottom: 3.5rem;
 	}
 
 	h2 {
-		margin-block: 1.5rem 1rem;
+		display: flex;
+		align-items: center;
+		gap: .4rem;
+		font-size: 1.7rem;
+		font-weight: 800;
+		letter-spacing: -.5px;
+		margin-block: 1.5rem 1.25rem;
+		padding-bottom: .5rem;
+		border-bottom: 1px solid var(--border);
 	}
 
 	h3 {
+		font-size: 1.25rem;
+		font-weight: 700;
 		margin-bottom: 1rem;
 	}
 
@@ -181,99 +192,148 @@ const onStateChange = (event) => {
 
 	p, li {
 		margin-bottom: .8rem;
+		line-height: 1.7;
 	}
 
 	.content-list {
-		padding-left: 1rem;
+		padding-left: 1.25rem;
+	}
+
+	/* ---- Code ---- */
+	code {
+		font-family: monospace;
+		font-size: .85em;
+		background: var(--code-bg);
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		padding: .12rem .4rem;
 	}
 
 	pre {
-		margin-bottom: 1rem;
 		position: relative;
-		border-radius: 4px;
-		background: #e6e6e6 !important;
+		margin-bottom: 1.25rem;
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		background: var(--code-bg);
+		overflow: auto;
+		max-height: 60vh;
+
+		code {
+			display: block;
+			border: 0;
+			background: transparent;
+			padding: 1rem 1.1rem;
+			font-size: .85rem;
+			line-height: 1.6;
+		}
 	}
 
-	code {
-		outline: 1px solid grey;
-		border-radius: 6px;
-		padding: .2rem .4rem;
-	}
-
-	code, pre>code {
-		border-radius: 4px !important;
-		background: #e6e6e6 !important;
-		max-height: 50vh;
-	}
-
-	pre>button {
+	.copy-button {
 		position: absolute;
-		right: 1%;
-		top: 8px;
-		font-size: 12px;
-		padding: .2rem;
+		top: .5rem;
+		right: .5rem;
+		display: inline-flex;
+		align-items: center;
+		font-size: .95rem;
+		padding: .25rem .4rem;
+		color: var(--muted);
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: 7px;
 		cursor: pointer;
+		opacity: 0;
+		transition: opacity .15s, color .15s, border-color .15s;
+
+		&:hover {
+			color: var(--vue-color);
+			border-color: var(--vue-color);
+		}
 	}
 
+	.copy-button:focus-visible,
+	pre:hover .copy-button {
+		opacity: 1;
+	}
+
+	/* ---- Heading anchors ---- */
 	.header-link {
-		font-size: 1.2rem;
-		padding-inline: .4rem;
-		cursor: pointer;
+		display: inline-flex;
+		font-size: 1.1rem;
+		color: var(--muted);
+		text-decoration: none;
+		opacity: 0;
+		transition: opacity .15s, color .15s;
+
+		&:hover {
+			color: var(--vue-color);
+		}
 	}
 
-	table {
-		border: 1px solid grey;
+	h2:hover .header-link {
+		opacity: 1;
+	}
 
-		th {
+	/* ---- Tables ---- */
+	table {
+		width: 100%;
+		border-collapse: separate;
+		border-spacing: 0;
+		border: 1px solid var(--border);
+		border-radius: 10px;
+		overflow: hidden;
+		margin-bottom: 1.25rem;
+
+		th, td {
+			padding: .65rem .8rem;
+			border-bottom: 1px solid var(--border);
 			text-align: left;
+			vertical-align: top;
 		}
 
-		td, th {
-			padding: .5rem;
-			border: 1px solid grey;
+		th {
+			background: var(--surface-2);
+			font-weight: 700;
+		}
+
+		tbody tr:last-child td {
+			border-bottom: 0;
+		}
+
+		tbody tr:hover {
+			background: var(--surface-2);
 		}
 	}
 
 	iframe {
 		margin-block: .5rem;
-		border-radius: 8px;
-	}
-}
-
-body.theme--dark {
-	pre, code, pre>code {
-		background: #303030 !important;
-		color: rgb(170 170 170);
+		border-radius: 10px;
 	}
 
-	pre>button {
-		color: #fff;
-		background: #1a1a1a;
-	}
-}
+	/* ---- Note callout ---- */
+	blockquote.doc-note {
+		margin: 1.25rem 0 1.5rem;
+		padding: 1rem 1.25rem;
+		border: 1px solid rgb(196 48 43 / 30%);
+		border-left: 4px solid #c4302b;
+		border-radius: 10px;
+		background: rgb(196 48 43 / 8%);
 
-.docs-content blockquote.doc-note {
-	margin: 1.25rem 0 1.5rem;
-	padding: 1rem 1.25rem;
-	border-left: 4px solid #c4302b;
-	border-radius: 4px;
-	background: rgb(196 48 43 / 8%);
+		p {
+			line-height: 1.8;
 
-	p {
-		line-height: 1.8;
+			code {
+				padding: .1rem .3rem;
+			}
 
-		code {
-			padding: .1rem;
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
 
-		&:last-child {
-			margin-bottom: 0;
+		.mdi {
+			vertical-align: middle;
+			margin-right: .25rem;
 		}
-	}
-
-	.mdi {
-		vertical-align: middle;
-		margin-right: 0.25rem;
 	}
 }
 

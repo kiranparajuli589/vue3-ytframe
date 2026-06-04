@@ -54,11 +54,12 @@ const {isDark, toggleDark} = useAppStore()
 
 	.mdi-youtube {
 		color: var(--vue-color);
-		font-size: 3rem;
+		font-size: 2rem;
 	}
 
 	&--title {
-		font-size: clamp(1rem , 1.5vw, 1.5rem);
+		font-size: 1rem;
+		font-size: 1rem;
 		font-weight: 500;
 		margin-left: .5rem;
 	}
@@ -76,8 +77,7 @@ const {isDark, toggleDark} = useAppStore()
 		}
 
 		& > .link {
-			font-size: clamp(.875rem , 1.5vw, 1rem);
-			font-weight: 500;
+			font-size: .875rem;
 			cursor: pointer;
 			color: inherit;
 			text-decoration: none;
