@@ -59,7 +59,6 @@ const {isDark, toggleDark} = useAppStore()
 
 	&--title {
 		font-size: 1rem;
-		font-size: 1rem;
 		font-weight: 500;
 		margin-left: .5rem;
 	}
