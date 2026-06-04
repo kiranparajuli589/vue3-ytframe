@@ -1,7 +1,51 @@
-/* Shared documentation prose (HTML from helper.js + DocSection) */
+/* Documentation layout, typography, and accessibility */
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.skip-link {
+	position: absolute;
+	left: 0.75rem;
+	top: 0.75rem;
+	z-index: 100;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	background: var(--surface);
+	color: var(--text);
+	border: 1px solid var(--border);
+	font-size: 0.875rem;
+	font-weight: 600;
+	text-decoration: none;
+	transform: translateY(-200%);
+	transition: transform 0.15s ease;
+}
+
+.skip-link:focus {
+	transform: translateY(0);
+	outline: var(--focus-ring-width) solid var(--focus-ring-color);
+	outline-offset: var(--focus-ring-offset);
+}
 
 .docs-content {
 	scroll-behavior: smooth;
+	color: var(--text);
+	font-size: 1rem;
+	line-height: 1.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.docs-content {
+		scroll-behavior: auto;
+	}
 }
 
 .docs-content section {
@@ -12,38 +56,91 @@
 	display: flex;
 	align-items: center;
 	gap: 0.4rem;
-	font-size: 1.7rem;
-	font-weight: 800;
-	letter-spacing: -0.5px;
+	font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.25;
+	color: var(--text);
 	margin-block: 1.5rem 1.25rem;
 	padding-bottom: 0.5rem;
 	border-bottom: 1px solid var(--border);
+	scroll-margin-top: 5rem;
 }
 
 .docs-content h3 {
-	font-size: 1.25rem;
-	font-weight: 700;
+	font-size: 1.125rem;
+	font-weight: 600;
+	line-height: 1.35;
+	color: var(--text);
 	margin-bottom: 1rem;
+	scroll-margin-top: 5rem;
 }
 
 .docs-content h4 {
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.4;
+	color: var(--text);
 	margin-bottom: 0.5rem;
+	scroll-margin-top: 5rem;
 }
 
 .docs-content p,
 .docs-content li {
 	margin-bottom: 0.8rem;
-	line-height: 1.7;
+	color: var(--text);
+}
+
+.docs-content strong {
+	font-weight: 600;
+	color: var(--text);
+}
+
+.docs-content a {
+	color: var(--vue-color);
+	font-weight: 500;
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+	text-decoration-thickness: 1px;
+}
+
+.docs-content a:hover {
+	color: var(--vue-color-hover);
+	text-decoration-thickness: 2px;
+}
+
+.docs-content a:focus-visible {
+	outline: var(--focus-ring-width) solid var(--focus-ring-color);
+	outline-offset: var(--focus-ring-offset);
+	border-radius: 2px;
+}
+
+.docs-content a[target="_blank"]::after {
+	content: " (opens in new tab)";
+	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
 }
 
 .docs-content .content-list {
 	padding-left: 1.25rem;
+	list-style: disc;
+}
+
+.docs-content .content-list li::marker {
+	color: var(--muted);
 }
 
 .docs-content code {
-	font-family: monospace;
-	font-size: 0.85em;
+	font-family: var(--font-mono);
+	font-size: 0.875em;
+	font-weight: 500;
 	background: var(--code-bg);
+	color: var(--text);
 	border: 1px solid var(--border);
 	border-radius: 6px;
 	padding: 0.12rem 0.4rem;
@@ -59,12 +156,18 @@
 	max-height: 60vh;
 }
 
+.docs-content pre:focus-within {
+	outline: var(--focus-ring-width) solid var(--focus-ring-color);
+	outline-offset: var(--focus-ring-offset);
+}
+
 .docs-content pre code {
 	display: block;
 	border: 0;
 	background: transparent;
 	padding: 1rem 1.1rem;
-	font-size: 0.85rem;
+	font-size: 0.875rem;
+	font-weight: 400;
 	line-height: 1.6;
 }
 
@@ -75,28 +178,39 @@
 	display: inline-flex;
 	align-items: center;
 	font-size: 0.95rem;
-	padding: 0.25rem 0.4rem;
-	color: var(--muted);
+	padding: 0.35rem 0.5rem;
+	color: var(--text);
 	background: var(--surface);
 	border: 1px solid var(--border);
 	border-radius: 7px;
 	cursor: pointer;
 	opacity: 0;
-	transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+	transition: opacity 0.15s, color 0.15s, border-color 0.15s, background-color 0.15s;
 }
 
 .docs-content .copy-button:hover {
 	color: var(--vue-color);
 	border-color: var(--vue-color);
+	background: var(--surface-2);
 }
 
-.docs-content .copy-button:focus-visible,
-.docs-content pre:hover .copy-button {
+.docs-content .copy-button:focus-visible {
+	opacity: 1;
+	outline: var(--focus-ring-width) solid var(--focus-ring-color);
+	outline-offset: var(--focus-ring-offset);
+}
+
+.docs-content pre:hover .copy-button,
+.docs-content pre:focus-within .copy-button {
 	opacity: 1;
 }
 
 .docs-content .header-link {
 	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 2rem;
+	min-height: 2rem;
 	font-size: 1.1rem;
 	color: var(--muted);
 	text-decoration: none;
@@ -106,6 +220,14 @@
 
 .docs-content .header-link:hover {
 	color: var(--vue-color);
+}
+
+.docs-content .header-link:focus-visible {
+	opacity: 1;
+	color: var(--vue-color);
+	outline: var(--focus-ring-width) solid var(--focus-ring-color);
+	outline-offset: var(--focus-ring-offset);
+	border-radius: 4px;
 }
 
 .docs-content h2:hover .header-link {
@@ -120,6 +242,15 @@
 	border-radius: 10px;
 	overflow: hidden;
 	margin-bottom: 1.25rem;
+	font-size: 0.9375rem;
+}
+
+.docs-content caption {
+	caption-side: top;
+	padding: 0.75rem 0.8rem;
+	text-align: left;
+	font-weight: 600;
+	color: var(--text);
 }
 
 .docs-content th,
@@ -128,11 +259,12 @@
 	border-bottom: 1px solid var(--border);
 	text-align: left;
 	vertical-align: top;
+	color: var(--text);
 }
 
 .docs-content th {
 	background: var(--surface-2);
-	font-weight: 700;
+	font-weight: 600;
 }
 
 .docs-content tbody tr:last-child td {
@@ -154,6 +286,7 @@
 	border-left: 4px solid var(--danger);
 	border-radius: 10px;
 	background: var(--danger-subtle);
+	color: var(--text);
 }
 
 .docs-content blockquote.doc-note p {
@@ -171,4 +304,24 @@
 .docs-content blockquote.doc-note .mdi {
 	vertical-align: middle;
 	margin-right: 0.25rem;
+}
+
+.docs-nav__label {
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--text);
+}
+
+.docs-nav__group-label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+
+.docs-nav__link:focus-visible {
+	outline: var(--focus-ring-width) solid var(--focus-ring-color);
+	outline-offset: var(--focus-ring-offset);
 }

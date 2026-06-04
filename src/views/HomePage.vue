@@ -1,6 +1,6 @@
 <template>
 	<div class="home-page">
-		<div class="text-gradient-hero px-4 pb-[5vh] pt-[20vh] text-center text-[clamp(20px,5vw,76px)] font-black leading-tight tracking-tight max-w-[960px] mx-auto">
+		<div class="text-gradient-hero px-4 pb-[5vh] pt-[20vh] text-center text-[clamp(20px,5vw,76px)] leading-tight tracking-wider max-w-[960px] mx-auto">
 			A fully typed YouTube Iframe API wrapper
 		</div>
 		<div class="mb-[4vh] text-center text-[clamp(0.875rem,1.5vw,1.2rem)]">

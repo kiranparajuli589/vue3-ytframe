@@ -10,10 +10,18 @@
 	--gradient-from: #42d392;
 	--gradient-to: #647eff;
 	--shadow-sm: 0 1px 2px rgb(0 0 0 / 4%);
+	--font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--font-hero: "Spicy Rice", cursive;
+	--font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+	--focus-ring-color: var(--vue-color);
+	--focus-ring-width: 2px;
+	--focus-ring-offset: 2px;
 }
 
 body {
 	--bg: #fff;
+	--text: #1a1a1a;
+	--text-secondary: #4b5563;
 	--surface: #fff;
 	--surface-2: #f6f7f9;
 	--border: #e4e6ea;
@@ -24,6 +32,12 @@ body {
 	--danger-subtle: color-mix(in srgb, var(--danger) 8%, transparent);
 	--danger-border: color-mix(in srgb, var(--danger) 30%, transparent);
 	--btn-muted-hover: #e1e1e1;
+
+	background-color: var(--bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	font-size: 1rem;
+	line-height: 1.6;
 }
 
 @theme inline {
@@ -41,7 +55,8 @@ body {
 
 body.theme--dark {
 	--bg: #1a1a1a;
-	--text: #fff;
+	--text: #f3f4f6;
+	--text-secondary: #d1d5db;
 	--surface: #242424;
 	--surface-2: #1c1c1c;
 	--border: #383838;
@@ -61,8 +76,16 @@ a {
 
 @layer components {
 	.text-gradient-hero {
+		font-family: var(--font-hero);
+		font-weight: 400;
 		background: linear-gradient(315deg, var(--gradient-from) 25%, var(--gradient-to));
 		background-clip: text;
+		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
+	}
+
+	.focus-ring:focus-visible {
+		outline: var(--focus-ring-width) solid var(--focus-ring-color);
+		outline-offset: var(--focus-ring-offset);
 	}
 }

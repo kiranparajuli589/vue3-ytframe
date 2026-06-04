@@ -1,28 +1,36 @@
 <template>
 	<aside class="docs-nav absolute h-full w-[220px] overflow-y-auto border-r border-border bg-surface-2 p-6 max-[600px]:hidden">
-		<h2 class="mb-6 text-2xl font-extrabold tracking-tight">Docs</h2>
-		<ul class="list-none">
-			<li v-for="(doc, n) in docItems" :key="n" class="mb-6">
-				<header class="mb-2 px-2.5 text-xs font-bold uppercase tracking-wider text-muted">
-					{{ doc.title }}
-				</header>
-				<ul class="flex list-none flex-col gap-0.5">
-					<li v-for="(item, index) in doc.items" :key="index">
-						<button
-							type="button"
-							class="block w-full cursor-pointer rounded-md border-0 border-l-2 px-2.5 py-1.5 text-left text-[0.9rem] transition-colors"
-							:class="isActive(item.title)
-								? 'border-accent bg-surface font-semibold text-accent'
-								: 'border-transparent bg-transparent text-inherit hover:border-accent hover:bg-surface hover:text-accent'"
-							:aria-current="isActive(item.title) ? 'location' : undefined"
-							@click="scrollToItem(item.title)"
-						>
-							{{ item.title }}
-						</button>
-					</li>
-				</ul>
-			</li>
-		</ul>
+		<p id="docs-nav-heading" class="docs-nav__label mb-6">Docs</p>
+		<nav aria-labelledby="docs-nav-heading">
+			<ul class="list-none">
+				<li v-for="(doc, n) in docItems" :key="n" class="mb-6">
+					<p
+						:id="`docs-nav-group-${n}`"
+						class="docs-nav__group-label mb-2 px-2.5"
+					>
+						{{ doc.title }}
+					</p>
+					<ul
+						class="flex list-none flex-col gap-0.5"
+						:aria-labelledby="`docs-nav-group-${n}`"
+					>
+						<li v-for="(item, index) in doc.items" :key="index">
+							<button
+								type="button"
+								class="docs-nav__link block w-full cursor-pointer rounded-md border-0 border-l-2 px-2.5 py-1.5 text-left text-[0.9375rem] leading-snug transition-colors"
+								:class="isActive(item.title)
+									? 'border-accent bg-surface font-semibold text-accent'
+									: 'border-transparent bg-transparent font-normal text-[var(--text-secondary)] hover:border-accent hover:bg-surface hover:text-accent'"
+								:aria-current="isActive(item.title) ? 'location' : undefined"
+								@click="scrollToItem(item.title)"
+							>
+								{{ item.title }}
+							</button>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
 	</aside>
 </template>
 <script setup>

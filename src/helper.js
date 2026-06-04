@@ -28,7 +28,7 @@ export const WhyVueYtframe = {
 	title: "Why VueYtframe?",
 	content: `<p>VueYtframe is a <strong>fully typed</strong>, lightweight Vue 3 component that wraps the entire <a href="https://developers.google.com/youtube/iframe_api_reference" target="_blank" rel="noopener noreferrer">YouTube Iframe API</a> — every official method and event, without re‑inventing playback logic in your app.</p>
 		<p>Version <strong>1.0.0</strong> is a quality-focused release: the library is written in TypeScript, ships its own types, includes a full test suite, and fixes several runtime edge cases. Existing integrations keep working — the default plugin import and all props, events, and methods are unchanged.</p>
-		<h3><span class="mdi mdi-key" /> Why choose it</h3>
+		<h3><span class="mdi mdi-key" aria-hidden="true" /> Why choose it</h3>
 		<ul class="content-list [&>li>strong]:text-accent">
 			<li><strong>Complete API surface</strong> — Exposes the full Iframe API on the component instance (<code>playVideo</code>, <code>seekTo</code>, playlists, volume, 360° spherical props, and more).</li>
 			<li><strong>TypeScript built in</strong> — Typed props, events, and <code>VueYtframeInstance</code> for template refs; <code>@types/youtube</code> resolves for consumers automatically.</li>
@@ -58,13 +58,13 @@ createApp(App).use(VueYtframe).mount("#app")</code></pre>
 		<h3>Option B — register locally (named export)</h3>
 		<pre><code>import { VueYtframe } from "vue3-ytframe"</code></pre>
 		<p>Use <code>&lt;VueYtframe&gt;</code> in the template of any component that imports it.</p>
-		<blockquote class="doc-note">
-			<p><span class="mdi mdi-information-outline" /> <strong>SSR (Nuxt, Quasar, etc.)</strong></p>
+		<blockquote class="doc-note" role="note" aria-label="SSR note">
+			<p><span class="mdi mdi-information-outline" aria-hidden="true" /> <strong>SSR (Nuxt, Quasar, etc.)</strong></p>
 			<p>The package ships <strong>ESM and CommonJS</strong> builds, so Node SSR servers can <code>require()</code> it without <code>ERR_REQUIRE_ESM</code>.</p>
 			<p>The player still depends on the browser YouTube Iframe API (<code>document</code>, <code>window</code>). Render it <strong>client-only</strong> — for example Nuxt <code>&lt;ClientOnly&gt;</code> or Quasar <code>QNoSsr</code>.</p>
 		</blockquote>
-		<blockquote class="doc-note">
-			<p><span class="mdi mdi-information-outline" /> <strong>UMD / CDN</strong></p>
+		<blockquote class="doc-note" role="note" aria-label="UMD and CDN note">
+			<p><span class="mdi mdi-information-outline" aria-hidden="true" /> <strong>UMD / CDN</strong></p>
 			<p>The global is a namespace in 1.0.0: use <code>VueYtframe.default</code> for the plugin or <code>VueYtframe.VueYtframe</code> for the component.</p>
 		</blockquote>`
 }

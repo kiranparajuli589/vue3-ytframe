@@ -1,0 +1,2 @@
+/*! tailwindcss v4.3.0 | MIT License | https://tailwindcss.com */
+.docs-content table tbody tr td:first-child{color:var(--vue-color);background-color:var(--code-bg);font-weight:600;font-family:var(--font-mono);font-size:.875em}

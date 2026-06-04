@@ -3,22 +3,29 @@
 		class="docs relative pb-12"
 		:style="{ height: `calc(100vh - ${appBarHeight} - ${footerHeight})` }"
 	>
+		<a href="#docs-main" class="skip-link">Skip to documentation content</a>
 		<DocsNav />
-		<div
-			class="docs-content overflow-auto px-6 pb-(--docs-footer-pad,0) pl-[244px] max-[600px]:pl-5"
+		<main
+			id="docs-main"
+			class="docs-content overflow-auto px-6 pb-[var(--docs-footer-pad,0)] pl-[244px] max-[600px]:pl-5"
 			:style="{
 				'--docs-footer-pad': footerHeight,
 				height: `calc(100vh - ${appBarHeight} - ${footerHeight})`,
 			}"
+			tabindex="-1"
+			aria-label="Documentation"
 		>
 			<DocSection :doc-item="WhyVueYtframe" />
 			<DocSection :doc-item="Installation" />
 			<DocSection :doc-item="GettingStarted">
 				<CodeBlock :code="MinimalExample" />
 				<div class="mb-4">
-					<p>Output</p>
+					<p class="font-medium text-[var(--text-secondary)]">Output</p>
 					<div class="max-w-[800px] h-[400px]">
-						<VueYtframe video-id="PvIL-Ycz6HI" :player-vars="{ autoplay: 0, listType: 'user_uploads' }" />
+						<VueYtframe
+							video-id="PvIL-Ycz6HI"
+							:player-vars="{ autoplay: 0, listType: 'user_uploads' }"
+						/>
 					</div>
 				</div>
 				<p>Controlling playback with a typed template ref:</p>
@@ -37,14 +44,18 @@
 					<CodeBlock :code="Example1" />
 
 					<h4>Output</h4>
-					<VueYtframe v-for="id in videosSet" :key="id" :video-id="id"
-						@state-change="onStateChange" ref="yt"
+					<VueYtframe
+						v-for="id in videosSet"
+						:key="id"
+						:video-id="id"
+						@state-change="onStateChange"
+						ref="yt"
 						:player-vars="{ autoplay: 0, listType: 'user_uploads' }"
 						height="300"
 					/>
 				</div>
 			</DocSection>
-		</div>
+		</main>
 	</div>
 </template>
 <script setup>
@@ -65,16 +76,20 @@ import VueYtframe from "../../lib/VueYtframe.vue"
 
 const {appBarHeight, footerHeight} = useAppChromeHeights()
 
+const prefersReducedMotion = () =>
+	window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
 onMounted(async () => {
 	await nextTick()
 	initializeCodeCopy()
 	initializeHeaderRefs()
+	enhanceExternalLinks()
 	hljs.highlightAll()
 	scrollToHeadingIfRefExists()
 })
 
 const initializeCodeCopy = () => {
-	document.querySelectorAll("pre code").forEach((codeBlock) => {
+	document.querySelectorAll(".docs-content pre code").forEach((codeBlock) => {
 		const pre = codeBlock.parentNode
 		if (!pre || pre.querySelector(".copy-button")) return
 		const copyButton = document.createElement("button")
@@ -83,8 +98,12 @@ const initializeCodeCopy = () => {
 		copyButton.setAttribute("aria-label", "Copy code to clipboard")
 		copyButton.innerHTML = "<span class=\"mdi mdi-content-copy\" aria-hidden=\"true\" />"
 		pre.appendChild(copyButton)
-		copyButton.addEventListener("click", () => {
-			navigator.clipboard.writeText(codeBlock.innerText)
+		copyButton.addEventListener("click", async () => {
+			await navigator.clipboard.writeText(codeBlock.innerText)
+			copyButton.setAttribute("aria-label", "Copied to clipboard")
+			setTimeout(() => {
+				copyButton.setAttribute("aria-label", "Copy code to clipboard")
+			}, 2000)
 		})
 	})
 }
@@ -92,12 +111,21 @@ const initializeCodeCopy = () => {
 const initializeHeaderRefs = () => {
 	document.querySelectorAll(".docs-content h2").forEach((header) => {
 		if (header.querySelector(".header-link")) return
+		const title = header.textContent?.trim() ?? ""
 		const link = document.createElement("a")
 		link.classList.add("header-link")
-		link.setAttribute("aria-label", `Link to ${header.textContent}`)
+		link.setAttribute("aria-label", `Copy link to section: ${title}`)
 		link.innerHTML = "<span class=\"mdi mdi-link-variant\" aria-hidden=\"true\" />"
-		link.href = `/vue3-ytframe/#/docs/ref=${getTitleID(header.innerText)}`
+		link.href = `/vue3-ytframe/#/docs/ref=${getTitleID(title)}`
 		header.appendChild(link)
+	})
+}
+
+const enhanceExternalLinks = () => {
+	document.querySelectorAll(".docs-content a[target=\"_blank\"]").forEach((anchor) => {
+		if (anchor.getAttribute("rel")?.includes("noopener")) return
+		const rel = anchor.getAttribute("rel") ?? ""
+		anchor.setAttribute("rel", `${rel} noopener noreferrer`.trim())
 	})
 }
 
@@ -107,7 +135,11 @@ const scrollToHeading = (headingId) => {
 	const header = document.getElementById(headingId)
 	if (header) {
 		setTimeout(() => {
-			header.scrollIntoView({ behavior: "smooth" })
+			header.scrollIntoView({
+				behavior: prefersReducedMotion() ? "auto" : "smooth",
+				block: "start",
+			})
+			document.getElementById("docs-main")?.focus({preventScroll: true})
 		}, 100)
 	}
 }
@@ -142,9 +174,12 @@ const onStateChange = (player) => {
 </script>
 <style lang="css">
 @reference "tailwindcss";
-table tbody tr td:first-child {
+
+.docs-content table tbody tr td:first-child {
 	color: var(--vue-color);
 	background-color: var(--code-bg);
-	font-weight: 500;
+	font-weight: 600;
+	font-family: var(--font-mono);
+	font-size: 0.875em;
 }
 </style>

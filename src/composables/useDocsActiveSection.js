@@ -26,11 +26,11 @@ export default function useDocsActiveSection() {
 
 		observer = new IntersectionObserver(
 			(entries) => {
-				const visible = entries
+				const topmost = entries
 					.filter((entry) => entry.isIntersecting)
-					.sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-				if (visible[0]?.target?.id) {
-					activeId.value = visible[0].target.id
+					.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
+				if (topmost?.target?.id) {
+					activeId.value = topmost.target.id
 				}
 			},
 			{
